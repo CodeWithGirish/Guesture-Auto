@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Add Application - Hand Gesture Automation</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1a227f",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#121320",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+
+        .console-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .console-scrollbar::-webkit-scrollbar-track {
+            background: #1a227f20;
+        }
+
+        .console-scrollbar::-webkit-scrollbar-thumb {
+            background: #1a227f40;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-[#0f101a]">
+    <div
+        class="relative flex h-auto min-h-screen w-full flex-col bg-background-light dark:bg-background-dark overflow-x-hidden">
+        <div class="layout-container flex h-full grow flex-col">
+            <!-- Top Navigation Bar -->
+            <header
+                class="sticky top-0 z-50 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+                <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex items-center h-16 gap-8">
+                        <!-- Logo Section -->
+                        <div class="flex items-center gap-3">
+                            <div class="bg-primary p-1.5 rounded-lg text-white">
+                                <span class="material-symbols-outlined block">back_hand</span>
+                            </div>
+                            <h1 class="text-lg font-bold tracking-tight text-primary">GuestureAuto<span
+                                    class="text-slate-500 font-normal"></span></h1>
+                        </div>
+                        <!-- Desktop Navigation Links -->
+                        <nav class="hidden md:flex space-x-8">
+                            <a class="text-slate-500 hover:text-primary dark:hover:text-white px-1 py-2 text-sm font-medium transition-colors"
+                                href="..\1_Dashboard and Profile\User Dashboard Screen.html">Dashboard</a>
+                            <a class="text-slate-500 hover:text-primary dark:hover:text-white px-1 py-2 text-sm font-medium transition-colors"
+                                href="..\4_Integration\1_Apllications Integration Screen.html">Connected Apps</a>
+                            <a class="text-primary dark:text-white border-b-2 border-primary px-1 py-2 text-sm font-semibold"
+                                href="#">Add Application</a>
+                        </nav>
+
+                    </div>
+                </div>
+            </header>
+            <!-- Main Content Section -->
+            <main class="flex-1 flex flex-col max-w-[1440px] mx-auto w-full px-6 py-6 gap-6">
+                <section class="bg-white rounded-xl border border-[#e9e9f2] p-6 shadow-sm">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                        <div>
+                            <h2 class="text-xl font-bold text-[#0f101a]">System Application Scanner</h2>
+                            <p class="text-[#555a91] text-sm">Find local applications compatible with hand gesture
+                                automation.</p>
+                        </div>
+                        <div class="flex gap-3 w-full md:w-auto">
+                            <button id="rescan-btn"
+                                class="flex items-center gap-2 bg-primary text-white px-5 py-2 rounded-lg font-bold text-sm hover:bg-primary/90 transition-all">
+                                <span id="rescan-icon" class="material-symbols-outlined text-lg">refresh</span>
+                                <span id="rescan-text">Rescan System</span>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <div id="app-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                </div>
+
+                <template id="grid-loading-template">
+                    <div class="col-span-full py-10 text-center text-[#555a91]">Scanning system registry...</div>
+                </template>
+
+                <template id="app-card-template">
+                    <div
+                        class="bg-white p-5 rounded-xl border border-[#e9e9f2] shadow-sm hover:border-primary/50 transition-all flex flex-col items-center text-center group h-full">
+                        <div
+                            class="size-16 rounded-2xl bg-slate-50 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform text-primary">
+                            <span class="app-icon material-symbols-outlined text-4xl">widgets</span>
+                        </div>
+                        <h3 class="app-name font-bold text-[#0f101a] mb-1 line-clamp-1 w-full" title="">App Name</h3>
+                        <p class="app-version text-xs text-[#555a91] mb-4">v1.0</p>
+                        <div class="mt-auto w-full">
+                            <button
+                                class="connect-btn w-full py-2 bg-background-light hover:bg-primary hover:text-white border border-[#d2d4e5] rounded-lg text-sm font-bold transition-all text-primary">
+                                Connect
+                            </button>
+                        </div>
+                    </div>
+                </template>
+
+                <section class="mt-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary">terminal</span>
+                            <h3 class="text-sm font-bold text-[#0f101a] uppercase tracking-wider">Live Connection
+                                Console</h3>
+                        </div>
+                        <div class="flex gap-2">
+                            <button id="clear-console-btn" class="text-[#555a91] hover:text-primary"
+                                title="Clear Console">
+                                <span class="material-symbols-outlined text-lg">delete</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="console-output"
+                        class="bg-[#121320] rounded-xl border border-[#1a227f40] p-4 h-48 console-scrollbar overflow-y-auto font-mono text-sm shadow-inner">
+                        <div id="console-container" class="flex flex-col gap-1.5">
+                        </div>
+                    </div>
+                </section>
+
+                <template id="console-log-template">
+                    <div class="flex gap-3">
+                        <span class="log-time text-[#555a91]"></span>
+                        <span class="log-type font-bold"></span>
+                        <span class="log-msg text-[#e9e9f2]"></span>
+                    </div>
+                </template>
+            </main>
+
+            <script src="integration_logic.js"></script>
+            <!-- Bottom Floating Action Bar (Optional but helpful for UX) -->
+            <footer
+                class="fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-md border-t border-[#e9e9f2] py-4 px-10 flex justify-between items-center z-40">
+                <div class="flex items-center gap-4">
+                    <p class="text-xs text-[#555a91] font-medium uppercase tracking-widest">Automation Hub v2.4.0</p>
+                </div>
+                <div class="flex gap-4">
+                    <button id="cancel-integrations-btn" class="px-6 py-2 rounded-lg text-sm font-bold text-[#555a91] hover:bg-[#e9e9f2] transition-all">
+                        Cancel
+                    </button>
+                    <button id="save-integrations-btn" class="px-6 py-2 bg-primary text-white rounded-lg text-sm font-bold shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all">
+                        Save Integrations
+                    </button>
+                </div>
+            </footer>
+        </div>
+    </div>
+</body>
+
+</html>

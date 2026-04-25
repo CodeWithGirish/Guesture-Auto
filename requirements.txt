@@ -1,0 +1,9 @@
+mediapipe
+opencv-python
+pywebview
+torch 
+torchvision
+psutil
+scikit-learn
+pyautogui
+keyboard

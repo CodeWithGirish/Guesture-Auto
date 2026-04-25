@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>AI Lab - Training Configuration</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1a227f",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#121320",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .slider-thumb::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            background: #1a227f;
+            cursor: pointer;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-[#0f101a] font-display min-h-screen">
+    <div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+        <div class="layout-container flex h-full grow flex-col">
+            <!-- Top Navigation Bar -->
+            <header
+                class="sticky top-0 z-50 bg-white dark:bg-background-dark border-b border-slate-200 dark:border-slate-800">
+                <div class="max-w-[1440px] mx-auto px-6 h-16 flex items-center justify-between">
+                    <div class="flex items-center gap-8">
+                        <div class="flex items-center gap-3 text-primary">
+                            <div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+                                <span class="material-symbols-outlined text-xl">layers</span>
+                            </div>
+                            <h1 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">GuestureAuto
+                            </h1>
+                        </div>
+                        <nav class="hidden md:flex items-center gap-6">
+                            <a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors"
+                                href="..\1_admin_dashboard\Admin Dashboard Screen.html">Dashboard</a>
+                            <a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors"
+                                href="..\2_Image Augumentation\1_dataset_overview\Dataset Overview Screen.html">Dataset
+                                Hub</a>
+                            <a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors border-b-2 border-primary pb-1 pt-1"
+                                href="#">Model Training</a>
+                            <a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors"
+                                href="..\4_User Management\1_user_management_-_enterprise_admin\User Management Screen.html">User
+                                Management</a>
+                            <a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors"
+                                href="..\5_deployment_&_version_control\Deploy Version Screen.html">Deployments</a>
+
+                        </nav>
+                    </div>
+                    <!-- Actions & Profile -->
+                    <div class="flex items-center gap-4">
+                        <div class="h-8 w-px bg-slate-200 dark:bg-slate-700"></div>
+                        <div class="flex items-center gap-3 ml-2 cursor-pointer group">
+                            <div class="size-9 rounded-full bg-slate-200 overflow-hidden border border-slate-200">
+                                <img alt="Profile" class="w-full h-full object-cover"
+                                    data-alt="Portrait of a professional ML researcher"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTt8V4eQVjA9lvtEpDuQDkLU10eshiSR3m167zH__Z9n_2MCcie4BjvKARyDFOl-a8rofCvSoYhL40vMoFt0FmxCXozXN2B7TjOu4044VOxIex560sfML5uOZ85-xu8k85rpTW5Sp-4OXlrsMnPd_vee6TkT-fBCJEWP-jlVIjnuIyZXyKFluKF3oNXzKFYiir4Xdk_l4L7MLHNVPA_YQYrN4IRRJGp9uiTvuaAyuhw-Iw_7vwux0WxOe6ttjn8HbJQZx0qxpsRMRM" />
+                            </div>
+                            <div class="hidden lg:block text-left leading-tight">
+                                <p
+                                    class="text-sm font-semibold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
+                                    Dr. Aris Thorne</p>
+                                <p class="text-xs text-slate-500">Admin</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <main class="flex-1 flex flex-col max-w-[1440px] mx-auto w-full px-6 py-6">
+                <!-- Page Header -->
+                <div>
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Training Configuration</h2>
+                        <p class="text-[#555a91] text-base font-normal">Fine-tune your hyperparameters and model
+                            architecture for optimal performance.</p>
+                    </div>
+                </div>
+
+                <!-- Tabs -->
+                <div class="border-b border-[#d2d4e5] mb-8">
+                    <div class="flex gap-10">
+                        <a class="flex flex-col items-center justify-center border-b-[3px] border-primary text-primary pb-4 pt-2 group"
+                            href="#">
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-[20px]">tune</span>
+                                <p class="text-sm font-bold tracking-[0.015em]">Training Configuration</p>
+                            </div>
+                        </a>
+                        <a class="flex flex-col items-center justify-center border-b-[3px] border-transparent text-[#555a91] pb-4 pt-2 hover:text-primary transition-all"
+                            href="..\2_Model_Training\Model Training Screen.html">
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-[20px]">monitoring</span>
+                                <p class="text-sm font-bold tracking-[0.015em]">Live Training</p>
+                            </div>
+                        </a>
+                        <a class="flex flex-col items-center justify-center border-b-[3px] border-transparent text-[#555a91] pb-4 pt-2 hover:text-primary transition-all"
+                            href="..\3_Model_Evaluation\Model Evaluation Results.html">
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-[20px]">analytics</span>
+                                <p class="text-sm font-bold tracking-[0.015em]">Evaluation Results</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <!-- Main Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+                    <!-- Form Section -->
+                    <div class="lg:col-span-2 space-y-8">
+                        <!-- Section 1: General Settings -->
+                        <div class="bg-white p-6 rounded-xl border border-[#e9e9f2] shadow-sm">
+                            <div class="flex items-center gap-2 mb-6 text-primary">
+                                <span class="material-symbols-outlined">settings_suggest</span>
+                                <h3 class="text-lg font-bold">General Settings</h3>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="flex flex-col gap-2">
+                                    <label class="text-sm font-bold text-[#0f101a] flex items-center gap-1">
+                                        Model Architecture
+                                        <span class="material-symbols-outlined text-[14px] text-[#555a91] cursor-help"
+                                            title="Select the base model structure">info</span>
+                                    </label>
+                                    <select
+                                        class="form-select w-full bg-background-light border-none rounded-lg h-11 text-sm focus:ring-2 focus:ring-primary/20">
+                                        <option>ResNet-50</option>
+                                        <option>EfficientNet-B0</option>
+                                        <option>Vision Transformer (ViT)</option>
+                                        <option>YOLOv8-Medium</option>
+                                    </select>
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <label class="text-sm font-bold text-[#0f101a]">Experiment Name</label>
+                                    <input
+                                        class="form-input w-full bg-background-light border-none rounded-lg h-11 text-sm focus:ring-2 focus:ring-primary/20"
+                                        type="text" value="CV_Object_Detection_v2.1" />
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Section 2: Hyperparameters -->
+                        <div class="bg-white p-6 rounded-xl border border-[#e9e9f2] shadow-sm">
+                            <div class="flex items-center gap-2 mb-6 text-primary">
+                                <span class="material-symbols-outlined">science</span>
+                                <h3 class="text-lg font-bold">Hyperparameters</h3>
+                            </div>
+                            <div class="space-y-8">
+                                <!-- Epochs and Batch Size -->
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div class="flex flex-col gap-2">
+                                        <label class="text-sm font-bold text-[#0f101a]">Epochs</label>
+                                        <input
+                                            class="form-input w-full bg-background-light border-none rounded-lg h-11 text-sm focus:ring-2 focus:ring-primary/20"
+                                            type="number" value="100" />
+                                    </div>
+                                    <div class="flex flex-col gap-2">
+                                        <label class="text-sm font-bold text-[#0f101a]">Batch Size</label>
+                                        <select
+                                            class="form-select w-full bg-background-light border-none rounded-lg h-11 text-sm focus:ring-2 focus:ring-primary/20">
+                                            <option>16</option>
+                                            <option selected="">32</option>
+                                            <option>64</option>
+                                            <option>128</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- Learning Rate Slider -->
+                                <div class="flex flex-col gap-4">
+                                    <div class="flex justify-between items-center">
+                                        <label class="text-sm font-bold text-[#0f101a] flex items-center gap-1">
+                                            Learning Rate
+                                            <span
+                                                class="material-symbols-outlined text-[14px] text-[#555a91] cursor-help"
+                                                title="Controls how much to change the model in response to the estimated error">info</span>
+                                        </label>
+                                        <span
+                                            class="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold tracking-wider">0.001</span>
+                                    </div>
+                                    <div class="flex items-center gap-4">
+                                        <input
+                                            class="w-full h-2 bg-primary/20 rounded-lg appearance-none cursor-pointer slider-thumb"
+                                            max="0.1" min="0.0001" step="0.0001" type="range" value="0.001" />
+                                        <input
+                                            class="w-20 text-center bg-background-light border-none rounded-lg h-10 text-xs font-bold focus:ring-2 focus:ring-primary/20"
+                                            type="text" value="0.001" />
+                                    </div>
+                                </div>
+                                <!-- Optimizer Segmented Buttons -->
+                                <div class="flex flex-col gap-3">
+                                    <label class="text-sm font-bold text-[#0f101a]">Optimizer</label>
+                                    <div class="flex p-1 bg-background-light rounded-lg w-full md:w-fit">
+                                        <button
+                                            class="px-6 py-2 rounded-md bg-primary text-white text-sm font-bold shadow-sm">Adam</button>
+                                        <button
+                                            class="px-6 py-2 rounded-md text-[#555a91] text-sm font-bold hover:bg-white/50 transition-colors">SGD</button>
+                                        <button
+                                            class="px-6 py-2 rounded-md text-[#555a91] text-sm font-bold hover:bg-white/50 transition-colors">RMSProp</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Sidebar / Summary Section -->
+                    <div class="space-y-6 sticky top-24">
+                        <!-- Estimation Card -->
+                        <div class="bg-primary text-white p-6 rounded-xl shadow-lg shadow-primary/20">
+                            <h4 class="text-lg font-bold mb-4 flex items-center gap-2">
+                                <span class="material-symbols-outlined text-[24px]">assignment</span>
+                                Training Estimation
+                            </h4>
+                            <div class="space-y-5">
+                                <div class="flex items-start gap-3 border-b border-white/10 pb-4">
+                                    <span class="material-symbols-outlined text-white/70">schedule</span>
+                                    <div>
+                                        <p class="text-xs text-white/70 font-medium">Estimated Completion</p>
+                                        <p class="text-lg font-bold">2h 15m</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3 border-b border-white/10 pb-4">
+                                    <span class="material-symbols-outlined text-white/70">token</span>
+                                    <div>
+                                        <p class="text-xs text-white/70 font-medium">Compute Tokens Required</p>
+                                        <p class="text-lg font-bold">450 Tokens</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3 pb-2">
+                                    <span class="material-symbols-outlined text-green-400">check_circle</span>
+                                    <div>
+                                        <p class="text-xs text-white/70 font-medium">Resource Availability</p>
+                                        <p class="text-lg font-bold text-green-400">High</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Action Buttons -->
+                        <div class="flex flex-col gap-3 pt-4">
+                            <button
+                                class="w-full bg-primary text-white h-12 rounded-lg font-bold text-base hover:bg-primary/90 transition-all shadow-md flex items-center justify-center gap-2">
+                                <span class="material-symbols-outlined text-[20px]">rocket_launch</span>
+                                Start Training Run
+                            </button>
+                            <button
+                                class="w-full bg-transparent text-[#555a91] h-12 rounded-lg font-bold text-sm hover:bg-background-light transition-all flex items-center justify-center gap-2">
+                                <span class="material-symbols-outlined text-[20px]">save</span>
+                                Save Configuration
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <!-- Footer-like padding -->
+            <div class="py-10"></div>
+        </div>
+    </div>
+</body>
+
+</html>

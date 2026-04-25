@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Dataset Overview</title>
+    <!-- Material Symbols -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1a227f",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#121320",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Add this custom scrollbar styling */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(26, 34, 127, 0.05);
+            border-radius: 8px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(26, 34, 127, 0.2);
+            border-radius: 8px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(26, 34, 127, 0.4);
+        }
+    </style>
+
+    <script>
+        function switchTab(tabId, title, btnId) {
+            document.querySelectorAll('.tab-page').forEach(function (el) {
+                el.classList.add('hidden');
+            });
+            document.getElementById(tabId).classList.remove('hidden');
+
+            document.getElementById('page-title').innerText = title;
+
+            document.querySelectorAll('.nav-link').forEach(function (el) {
+                el.className = 'nav-link border-b-2 border-transparent py-4 px-1 text-sm font-medium text-slate-500 hover:text-slate-700 hover:border-slate-300 flex items-center gap-2';
+            });
+            document.getElementById(btnId).className = 'nav-link border-b-2 border-primary py-4 px-1 text-sm font-bold text-primary flex items-center gap-2';
+            
+            if (tabId === 'tab-augmentation') {
+                if (typeof initializeAugmentationScreen === 'function') {
+                    initializeAugmentationScreen();
+                }
+            } else if (tabId === 'tab-gallery') {
+                if (typeof fetchAndUpdateData === 'function') {
+                    fetchAndUpdateData();
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-slate-900 font-display min-h-screen">
+    <!-- Top Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-white dark:bg-background-dark border-b border-slate-200 dark:border-slate-800">
+        <div class="max-w-[1440px] mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-8">
+                <div class="flex items-center gap-3 text-primary">
+                    <div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+                        <span class="material-symbols-outlined text-xl">layers</span>
+                    </div>
+                    <h1 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">GuestureAuto</h1>
+                </div>
+                <nav class="hidden md:flex items-center gap-6">
+                    <a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors border-b-2 border-primary pb-1 pt-1"
+                        href="..\2_Image Augumentation\Dataset Overview Screen.html"
+                        onclick="switchTab('tab-overview', 'Gesture Synthesis Dataset', 'nav-overview'); return false;">Dataset
+                        Hub</a>
+                    <a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors"
+                        href="..\3_Model Training\Model Configration Screen.html">Model
+                        Training</a>
+                    <a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors"
+                        href="..\5_deployment_&_version_control\Deploy Version Screen.html">Deployments</a>
+
+                </nav>
+            </div>
+            <!-- Actions & Profile -->
+            <div class="flex items-center gap-4">
+                <div class="h-8 w-px bg-slate-200 dark:bg-slate-700"></div>
+                <div class="flex items-center gap-3 ml-2 cursor-pointer group">
+                    <div class="size-9 rounded-full bg-slate-200 overflow-hidden border border-slate-200">
+                        <img alt="Profile" class="w-full h-full object-cover"
+                            data-alt="Portrait of a professional ML researcher"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTt8V4eQVjA9lvtEpDuQDkLU10eshiSR3m167zH__Z9n_2MCcie4BjvKARyDFOl-a8rofCvSoYhL40vMoFt0FmxCXozXN2B7TjOu4044VOxIex560sfML5uOZ85-xu8k85rpTW5Sp-4OXlrsMnPd_vee6TkT-fBCJEWP-jlVIjnuIyZXyKFluKF3oNXzKFYiir4Xdk_l4L7MLHNVPA_YQYrN4IRRJGp9uiTvuaAyuhw-Iw_7vwux0WxOe6ttjn8HbJQZx0qxpsRMRM" />
+                    </div>
+                    <div class="hidden lg:block text-left leading-tight">
+                        <p
+                            class="text-sm font-semibold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
+                            Dr. Aris Thorne</p>
+                        <p class="text-xs text-slate-500">Admin</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="max-w-[1440px] mx-auto p-6 space-y-6">
+        <!-- Header & Tabs -->
+        <div class="mb-8">
+
+            <div>
+                <h2 id="page-title" class="text-2xl font-bold text-slate-900 dark:text-white">Gesture Synthesis Dataset
+                </h2>
+            </div>
+            <!-- Integrated Toggle Tabs -->
+            <div class="border-b border-slate-200 dark:border-slate-800">
+                <nav aria-label="Tabs" class="flex gap-8">
+                    <a id="nav-gallery"
+                        class="nav-link border-b-2 border-transparent py-4 px-1 text-sm font-medium text-slate-500 hover:text-slate-700 hover:border-slate-300 flex items-center gap-2"
+                        href="#"
+                        onclick="switchTab('tab-gallery', 'Augmentation Preview', 'nav-gallery'); return false;">
+                        <span class="material-symbols-outlined text-lg">photo_library</span>Priview Gallary</a>
+                    <a id="nav-augmentation"
+                        class="nav-link border-b-2 border-transparent py-4 px-1 text-sm font-medium text-slate-500 hover:text-slate-700 hover:border-slate-300 flex items-center gap-2"
+                        href="#"
+                        onclick="switchTab('tab-augmentation', 'Batch Augmentation', 'nav-augmentation'); return false;">
+                        <span class="material-symbols-outlined text-lg">monitoring</span>Augumentation</a>
+                </nav>
+            </div>
+        </div>
+
+        <div id="tab-gallery" class="tab-page hidden">
+            <!-- Header & Filter Bar -->
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-8">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Guesture Variations</h2>
+                    <p class="text-slate-500 text-sm mt-1">Inspecting <span id="total-augmented-count"
+                            class="font-bold">0</span> augmented variations from 'Hand Gestures'augmented variations</p>
+                </div>
+                <div class="flex flex-wrap items-center gap-3">
+                    <div
+                        class="flex items-center bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-1.5 gap-2">
+                        <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Gesture:</span>
+                        <select id="gesture-filter"
+                            class="bg-transparent border-none text-sm p-50 focus:ring-0 font-medium">
+                            <option value="all">All Gestures</option>
+                        </select>
+                    </div>
+                    <div
+                        class="flex items-center bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-1.5 gap-2">
+                        <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Sort:</span>
+                        <select id="sort-filter"
+                            class="bg-transparent border-none text-sm p-50 focus:ring-0 font-medium">
+                            <option value="newest">Newest Generated</option>
+                            <option value="name-asc">Name (A-Z)</option>
+                            <option value="name-desc">Name (Z-A)</option>
+                            <option value="count-desc">Most Images</option>
+                            <option value="count-asc">Least Images</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!-- Image Gallery Grid -->
+            <div id="augmented-gestures-grid"
+                class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 mt-6">
+
+                <div id="empty-state"
+                    class="col-span-full hidden flex flex-col items-center justify-center py-32 text-slate-400">
+                    <span class="material-symbols-outlined text-6xl mb-4 opacity-50">folder_off</span>
+                    <p class="text-lg font-bold text-slate-600">No augmented datasets found.</p>
+                    <p class="text-sm font-medium mt-1">Go to the Augmentation tab and run a batch to generate data.</p>
+                </div>
+
+                <template id="gesture-card-template">
+                    <div
+                        class="gesture-card group bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm hover:shadow-lg hover:border-primary/50 transition-all duration-300 flex flex-col cursor-pointer hover:-translate-y-1">
+
+                        <div class="relative w-full aspect-[4/3] bg-slate-100 overflow-hidden">
+                            <img class="gesture-thumbnail w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                src="" alt="Thumbnail" loading="lazy">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            </div>
+
+                            <div
+                                class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-md text-[10px] font-bold text-primary border border-white/20 shadow-sm flex items-center gap-1">
+                                <span class="material-symbols-outlined text-[14px]">auto_awesome</span>
+                                AUGMENTED
+                            </div>
+                        </div>
+
+                        <div class="p-4 flex flex-col gap-1 border-t border-slate-100 bg-white z-10">
+                            <div class="flex items-center justify-between">
+                                <h3 class="gesture-name font-bold text-slate-800 truncate text-lg drop-shadow-sm"></h3>
+                                <div class="flex items-center gap-2">
+                                    <span
+                                        class="delete-gesture-btn material-symbols-outlined text-slate-300 hover:text-red-500 transition-colors text-[18px]"
+                                        title="Delete Augmented Data">delete</span>
+                                    <span
+                                        class="material-symbols-outlined text-slate-300 group-hover:text-primary transition-colors text-[18px]">open_in_new</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-1.5 text-xs text-slate-500 font-bold mt-1">
+                                <span class="material-symbols-outlined text-[16px]">photo_library</span>
+                                <span class="gesture-count text-slate-700"></span> Images Generated
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+            <!-- Pagination -->
+            <div class="mt-12 flex items-center justify-between border-t border-slate-200 dark:border-slate-800 pt-6">
+                <div id="augmented-gestures-grid"
+                    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 mt-6">
+                </div>
+
+                <div id="pagination-controls"
+                    class="hidden mt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-t border-slate-200 pt-6 pb-2">
+                    <div class="text-sm text-slate-500 font-medium">
+                        Showing <span id="page-start" class="font-bold text-slate-900">0</span> to <span id="page-end"
+                            class="font-bold text-slate-900">0</span> of <span id="page-total"
+                            class="font-bold text-slate-900">0</span> datasets
+                    </div>
+                    <div class="flex items-center gap-2" id="pagination-buttons">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="tab-augmentation" class="tab-page hidden">
+
+            <!-- Secondary Info Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="bg-white p-4 border border-slate-200 rounded-xl flex items-center gap-4">
+                    <div class="size-10 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center">
+                        <span class="material-symbols-outlined">analytics</span>
+                    </div>
+                    <div>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Dataset Size</p>
+                        <p id="kpi-dataset-size" class="text-lg font-bold text-slate-900">0 <span
+                                class="text-xs font-normal text-slate-500">imgs</span></p>
+                    </div>
+                </div>
+                <div class="bg-white p-4 border border-slate-200 rounded-xl flex items-center gap-4">
+                    <div class="size-10 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center">
+                        <span class="material-symbols-outlined">speed</span>
+                    </div>
+                    <div>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Proc. Speed</p>
+                        <p id="kpi-proc-speed" class="text-lg font-bold text-slate-900">0 <span
+                                class="text-xs font-normal text-slate-500">ms/img</span></p>
+                    </div>
+                </div>
+                <div class="bg-white p-4 border border-slate-200 rounded-xl flex items-center gap-4">
+                    <div class="size-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center">
+                        <span class="material-symbols-outlined">memory</span>
+                    </div>
+                    <div>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Sys Memory</p>
+                        <p id="kpi-memory" class="text-lg font-bold text-slate-900">-- / --</p>
+                    </div>
+                </div>
+                <div class="bg-white p-4 border border-slate-200 rounded-xl flex items-center gap-4">
+                    <div class="size-10 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center">
+                        <span class="material-symbols-outlined">history</span>
+                    </div>
+                    <div>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Last Run</p>
+                        <p id="kpi-last-run" class="text-lg font-bold text-slate-900">--</p>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8"></div>
+            <!-- Status & Progress Section -->
+            <section
+                class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-5 shadow-sm mb-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 flex-row gap-6">
+                    <div class="flex flex-col gap-2">
+                        <label class="text-sm font-bold text-slate-900 dark:text-slate-200 flex items-center gap-1">
+                            Augument Image Count
+                        </label>
+                        <input id="augment-count-input"
+                            class="form-input w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg h-11 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                            type="number" value="500" min="1" />
+                    </div>
+                </div>
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div class="flex-1 space-y-2">
+                        <div class="flex items-center justify-between mb-1">
+                            <div class="flex items-center gap-3">
+                                <span id="processing-icon" class="material-symbols-outlined text-slate-400">sync</span>
+                                <h3 class="font-semibold text-slate-900 dark:text-white">Batch Processing: <span
+                                        id="processing-gesture-name" class="text-primary font-bold">Waiting...</span>
+                                </h3>
+                            </div>
+                            <span id="processing-percent-text"
+                                class="text-sm font-bold text-primary bg-primary/10 px-2 py-0.5 rounded">0%
+                                Complete</span>
+                        </div>
+                        <div class="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-3 overflow-hidden">
+                            <div id="processing-progress-bar"
+                                class="bg-primary h-full rounded-full transition-all duration-300" style="width: 0%;">
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center text-xs text-slate-500 font-medium pt-1">
+                            <span id="processed-count">0 images processed</span>
+                            <span id="remaining-count">Waiting to start</span>
+                            <span id="eta-text">Est. time: --</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <button id="abort-batch-btn"
+                            class="flex items-center gap-2 px-4 py-2.5 rounded-lg border border-red-200 text-red-600 hover:bg-red-50 font-bold text-sm transition-colors opacity-50 cursor-not-allowed"
+                            disabled>
+                            <span class="material-symbols-outlined text-lg">stop_circle</span>
+                            <span id="abort-btn-text">Abort Batch</span>
+                        </button>
+                        <button id="start-batch-btn"
+                            class="flex justify-center items-center gap-2 px-6 py-2.5 min-w-[240px] rounded-lg bg-primary text-white hover:bg-opacity-90 font-bold text-sm shadow-lg shadow-primary/20 transition-all">
+                            <span id="start-btn-icon" class="material-symbols-outlined text-lg">play_arrow</span>
+                            <span id="start-btn-text">Start Batch Processing</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <!-- Bottom Panel: Parameters Control Dock -->
+                <div class="lg:col-span-12 bg-white border border-slate-200 rounded-xl shadow-md p-6">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
+                        <h3 class="font-bold text-slate-900 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary">settings_input_component</span>
+                            Augmentation Parameters
+                        </h3>
+
+                        <div class="flex flex-wrap items-center gap-4">
+                            <div
+                                class="flex items-center gap-3 bg-slate-50 px-4 py-2 rounded-lg border border-slate-200">
+                                <span class="text-sm font-semibold text-slate-700">Use Parameters</span>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input id="use-params-toggle" type="checkbox" class="sr-only peer" checked>
+                                    <div
+                                        class="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary">
+                                    </div>
+                                </label>
+                            </div>
+
+                            <div class="flex gap-2 border-l border-slate-200 pl-4">
+                                <button id="reset-aug-btn"
+                                    class="px-4 py-2 border border-slate-200 rounded-lg text-sm font-semibold text-slate-600 hover:bg-slate-50 transition-all flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-[18px]">restart_alt</span>
+                                    Reset
+                                </button>
+                                <button id="apply-batch-btn"
+                                    class="px-6 py-2 bg-primary text-white rounded-lg text-sm font-semibold hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-[18px]">save</span>
+                                    Save Preset
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="params-container"
+                        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-6 transition-opacity duration-300">
+                        <!-- Parameter: Rotation -->
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <label class="text-xs font-bold text-slate-500 uppercase tracking-wide">Rotation</label>
+                                <span id="rotation-val"
+                                    class="text-sm font-mono bg-slate-100 px-2 py-0.5 rounded text-primary font-bold">0°</span>
+                            </div>
+                            <input id="rotation-slider"
+                                class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer" max="180"
+                                min="-180" type="range" value="0" />
+                            <div class="flex justify-between text-[10px] text-slate-400 font-medium px-1">
+                                <span>-180°</span>
+                                <span>0°</span>
+                                <span>180°</span>
+                            </div>
+                        </div>
+                        <!-- Parameter: Gaussian Blur -->
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <label class="text-xs font-bold text-slate-500 uppercase tracking-wide">Gaussian
+                                    Blur</label>
+                                <span id="blur-val"
+                                    class="text-sm font-mono bg-slate-100 px-2 py-0.5 rounded text-primary font-bold">1.2px</span>
+                            </div>
+                            <input id="blur-slider"
+                                class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer" max="10"
+                                min="0" step="0.1" type="range" value="1.2" />
+                            <div class="flex justify-between text-[10px] text-slate-400 font-medium px-1">
+                                <span>0px</span>
+                                <span>5px</span>
+                                <span>10px</span>
+                            </div>
+                        </div>
+                        <!-- Parameter: Noise Intensity -->
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <label class="text-xs font-bold text-slate-500 uppercase tracking-wide">Noise
+                                    Intensity</label>
+                                <span id="noise-val"
+                                    class="text-sm font-mono bg-slate-100 px-2 py-0.5 rounded text-primary font-bold">15%</span>
+                            </div>
+                            <input id="noise-slider"
+                                class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer" max="100"
+                                min="0" type="range" value="15" />
+                            <div class="flex justify-between text-[10px] text-slate-400 font-medium px-1">
+                                <span>Clean</span>
+                                <span>50%</span>
+                                <span>Heavy</span>
+                            </div>
+                        </div>
+                        <!-- Parameter: Brightness -->
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <label
+                                    class="text-xs font-bold text-slate-500 uppercase tracking-wide">Brightness</label>
+                                <span id="brightness-val"
+                                    class="text-sm font-mono bg-slate-100 px-2 py-0.5 rounded text-primary font-bold">1.0x</span>
+                            </div>
+                            <input id="brightness-slider"
+                                class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer" max="2"
+                                min="0" step="0.1" type="range" value="1" />
+                            <div class="flex justify-between text-[10px] text-slate-400 font-medium px-1">
+                                <span>Dark</span>
+                                <span>Normal</span>
+                                <span>Bright</span>
+                            </div>
+                        </div>
+                        <!-- Parameter: Contrast -->
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <label class="text-xs font-bold text-slate-500 uppercase tracking-wide">Contrast</label>
+                                <span id="contrast-val"
+                                    class="text-sm font-mono bg-slate-100 px-2 py-0.5 rounded text-primary font-bold">1.25x</span>
+                            </div>
+                            <input id="contrast-slider"
+                                class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer" max="2"
+                                min="0.5" step="0.1" type="range" value="1.25" />
+                            <div class="flex justify-between text-[10px] text-slate-400 font-medium px-1">
+                                <span>Flat</span>
+                                <span>Normal</span>
+                                <span>High</span>
+                            </div>
+                        </div>
+                        <!-- Parameter: Horizontal Flip (Toggle) -->
+                        <div
+                            class="flex items-center justify-between p-4 bg-slate-50 rounded-lg border border-slate-100">
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-slate-400">flip</span>
+                                <span class="text-sm font-semibold text-slate-700">Random Flip</span>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input id="flip-toggle" checked="" class="sr-only peer" type="checkbox" value="" />
+                                <div
+                                    class="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary">
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Main Configuration & Stream Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- Left Column: Selection Panel -->
+                <div class="lg:col-span-4 space-y-6">
+                    <!-- Dataset Source -->
+                    <div
+                        class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
+                        <div
+                            class="bg-slate-50 dark:bg-slate-800/50 px-4 py-3 border-b border-slate-200 dark:border-slate-800">
+                            <h4 class="text-sm font-bold text-slate-700 dark:text-slate-300 flex items-center gap-2">
+                                <span class="material-symbols-outlined text-lg text-primary">database</span>
+                                Dataset Source
+                            </h4>
+                        </div>
+                        <div class="p-4">
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Select
+                                Target Set</label>
+
+                            <select id="gesture-selector"
+                                class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg py-2.5 px-3 text-sm focus:ring-primary focus:border-primary">
+                            </select>
+
+                            <div
+                                class="mt-4 flex items-center gap-3 p-3 bg-blue-50 dark:bg-primary/10 rounded-lg border border-blue-100 dark:border-primary/20">
+                                <span class="material-symbols-outlined text-primary">info</span>
+                                <div class="text-xs text-slate-600 dark:text-slate-400">
+                                    <span id="image-count-num" class="font-bold">0</span> images detected in this source
+                                    directory.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Right Column: Live Stream -->
+                <div class="lg:col-span-8">
+                    <div
+                        class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 flex flex-col shadow-sm overflow-hidden h-[750px]">
+
+                        <div
+                            class="bg-slate-50 dark:bg-slate-800/50 px-6 py-4 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center shrink-0 z-10">
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-primary">visibility</span>
+                                <h4 class="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-tight">
+                                    Live Processing Stream</h4>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="size-2 bg-green-500 rounded-full animate-pulse"></span>
+                                <span class="text-xs font-bold text-slate-500">ACTIVE SESSION</span>
+                            </div>
+                        </div>
+
+                        <div id="live-stream-grid"
+                            class="p-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5 overflow-y-auto custom-scrollbar flex-1 min-h-0 auto-rows-max bg-slate-50/30 dark:bg-slate-900/50 content-start">
+
+                            <div id="stream-empty-state"
+                                class="col-span-full text-center text-slate-500 py-20 text-sm hidden flex flex-col items-center justify-center">
+                                <span class="material-symbols-outlined text-4xl opacity-30 mb-2">image_search</span>
+                                <p>No augmented images found.</p>
+                                <p class="text-xs opacity-70">Select a gesture or start a batch to generate some!</p>
+                            </div>
+
+                            <template id="stream-card-template">
+                                <div
+                                    class="stream-card relative group aspect-square w-full rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-lg hover:border-primary/50 bg-white z-0 hover:z-10">
+                                    <img class="stream-img absolute inset-0 w-full h-full object-cover" src="" alt=""
+                                        loading="lazy" />
+
+                                    <div
+                                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                                        <p
+                                            class="stream-filename text-[10px] font-bold text-white truncate drop-shadow-md">
+                                        </p>
+                                        <p
+                                            class="text-[9px] text-green-400 bg-black/60 px-1.5 py-0.5 rounded-md w-fit font-bold mt-1 backdrop-blur-sm border border-white/10">
+                                            AUGMENTED</p>
+                                    </div>
+                                </div>
+                            </template>
+
+                        </div>
+
+                        <div
+                            class="mt-auto border-t border-slate-200 dark:border-slate-800 p-4 bg-slate-50/50 dark:bg-slate-800/20 text-center shrink-0 z-10">
+                            <p class="text-[11px] text-slate-500 font-medium">Displaying latest generated images for the
+                                selected dataset.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="dataset_hub_logic.js"></script>
+    </main>
+</body>
+
+</html>

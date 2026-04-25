@@ -1,0 +1,17 @@
+{
+    "classes": [
+        "four",
+        "good",
+        "one",
+        "plam",
+        "three",
+        "thumb",
+        "thumbdown",
+        "thumbleft",
+        "thumbright",
+        "two"
+    ],
+    "input_shape": [
+        63
+    ]
+}

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>AI Lab - Model Training</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1a227f",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#121320",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(26, 34, 127, 0.05);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(26, 34, 127, 0.2);
+            border-radius: 10px;
+        }
+
+        .dotted-line {
+            stroke-dasharray: 4 4;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 antialiased">
+    <div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+        <!-- Top Navigation Bar -->
+        <header
+            class="sticky top-0 z-50 bg-white dark:bg-background-dark border-b border-slate-200 dark:border-slate-800">
+            <div class="max-w-[1440px] mx-auto px-6 h-16 flex items-center justify-between">
+                <div class="flex items-center gap-8">
+                    <div class="flex items-center gap-3 text-primary">
+                        <div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+                            <span class="material-symbols-outlined text-xl">layers</span>
+                        </div>
+                        <h1 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">GuestureAuto</h1>
+                    </div>
+                    <nav class="hidden md:flex items-center gap-6">
+                        <a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors"
+                            href="#">Dashboard</a>
+                        <a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors"
+                            href="#">Dataset Hub</a>
+                        <a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors border-b-2 border-primary pb-1 pt-1"
+                            href="#">Model Training</a>
+                        <a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors" href="#">User
+                            Management</a>
+                        <a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors"
+                            href="#">Deployments</a>
+
+                    </nav>
+                </div>
+                <!-- Actions & Profile -->
+                <div class="flex items-center gap-4">
+                    <div class="h-8 w-px bg-slate-200 dark:bg-slate-700"></div>
+                    <div class="flex items-center gap-3 ml-2 cursor-pointer group">
+                        <div class="size-9 rounded-full bg-slate-200 overflow-hidden border border-slate-200">
+                            <img alt="Profile" class="w-full h-full object-cover"
+                                data-alt="Portrait of a professional ML researcher"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTt8V4eQVjA9lvtEpDuQDkLU10eshiSR3m167zH__Z9n_2MCcie4BjvKARyDFOl-a8rofCvSoYhL40vMoFt0FmxCXozXN2B7TjOu4044VOxIex560sfML5uOZ85-xu8k85rpTW5Sp-4OXlrsMnPd_vee6TkT-fBCJEWP-jlVIjnuIyZXyKFluKF3oNXzKFYiir4Xdk_l4L7MLHNVPA_YQYrN4IRRJGp9uiTvuaAyuhw-Iw_7vwux0WxOe6ttjn8HbJQZx0qxpsRMRM" />
+                        </div>
+                        <div class="hidden lg:block text-left leading-tight">
+                            <p
+                                class="text-sm font-semibold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
+                                Dr. Aris Thorne</p>
+                            <p class="text-xs text-slate-500">Admin</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main class="flex-1 flex flex-col max-w-[1440px] mx-auto w-full px-6 py-6">
+            <!-- Page Header -->
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex flex-col gap-2">
+
+                    <div class="mb-4">
+                        <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Training Analysis</h2>
+                        <p class="text-[#555a91] text-base font-normal">Fine-tune your hyperparameters and model
+                            architecture for optimal performance.</p>
+                    </div>
+
+                </div>
+                <div class="flex gap-2">
+                    <button
+                        class="px-4 py-2 rounded-lg border border-red-200 text-red-600 bg-red-50 hover:bg-red-100 text-sm font-semibold transition-all flex items-center gap-2">
+                        <span class="material-symbols-outlined text-lg">stop_circle</span> Stop Training
+                    </button>
+                    <button
+                        class="px-4 py-2 rounded-lg bg-primary text-white hover:bg-primary/90 text-sm font-semibold transition-all flex items-center gap-2 shadow-sm">
+                        <span class="material-symbols-outlined text-lg">save</span> Export Weights
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="border-b border-[#d2d4e5] mb-8">
+                <div class="flex gap-10">
+                    <a class="flex flex-col items-center justify-center border-b-[3px] border-transparent text-[#555a91] pb-4 pt-2 hover:text-primary transition-all"
+                        href="..\1_Model_Configration\Model Configration Screen.html">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-[20px]">tune</span>
+                            <p class="text-sm font-bold tracking-[0.015em]">Training Configuration</p>
+                        </div>
+                    </a>
+                    <a class="flex flex-col items-center justify-center border-b-[3px] border-primary text-primary pb-4 pt-2 group"
+                        href="#">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-[20px]">monitoring</span>
+                            <p class="text-sm font-bold tracking-[0.015em]">Live Training</p>
+                        </div>
+                    </a>
+                    <a class="flex flex-col items-center justify-center border-b-[3px] border-transparent text-[#555a91] pb-4 pt-2 hover:text-primary transition-all" 
+                    href="..\3_Model_Evaluation\Model Evaluation Results.html">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-[20px]">analytics</span>
+                            <p class="text-sm font-bold tracking-[0.015em]">Evaluation Results</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Progress Section -->
+            <div class="bg-white rounded-xl border border-primary/10 p-5 mb-6 shadow-sm">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-primary">data_usage</span>
+                        <p class="text-slate-900 text-base font-semibold leading-normal">Training Epoch 45/100</p>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <span class="text-primary text-sm font-bold bg-primary/10 px-2 py-1 rounded">45% Complete</span>
+                        <span class="text-slate-500 text-sm">Estimated: 2h 15m remaining</span>
+                    </div>
+                </div>
+                <div class="w-full bg-slate-100 rounded-full h-3 overflow-hidden">
+                    <div class="bg-primary h-full rounded-full transition-all duration-1000" style="width: 45%;"></div>
+                </div>
+            </div>
+            <!-- Main Content Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-6">
+                <!-- Real-time Graph Card -->
+                <div class="lg:col-span-3 bg-white rounded-xl border border-primary/10 p-6 shadow-sm flex flex-col">
+                    <div class="flex justify-between items-center mb-6">
+                        <div>
+                            <h3 class="text-slate-900 font-bold text-lg">Training Metrics</h3>
+                            <p class="text-slate-500 text-xs">Real-time performance monitoring</p>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-sm bg-primary"></span>
+                                <span class="text-xs font-medium text-slate-600">Accuracy (0.912)</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span
+                                    class="w-3 h-3 rounded-sm bg-orange-400 border border-orange-400 border-dashed"></span>
+                                <span class="text-xs font-medium text-slate-600">Loss (0.234)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex-1 min-h-[320px] relative">
+                        <svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 800 300">
+                            <!-- Grid Lines -->
+                            <line stroke="#f1f5f9" stroke-width="1" x1="0" x2="800" y1="50" y2="50"></line>
+                            <line stroke="#f1f5f9" stroke-width="1" x1="0" x2="800" y1="100" y2="100"></line>
+                            <line stroke="#f1f5f9" stroke-width="1" x1="0" x2="800" y1="150" y2="150"></line>
+                            <line stroke="#f1f5f9" stroke-width="1" x1="0" x2="800" y1="200" y2="200"></line>
+                            <line stroke="#f1f5f9" stroke-width="1" x1="0" x2="800" y1="250" y2="250"></line>
+                            <!-- Accuracy Line (Solid Blue) -->
+                            <path d="M0,280 Q50,250 100,220 T200,180 T300,120 T400,90 T500,70 T600,60 T700,55 T800,50"
+                                fill="none" stroke="#1a227f" stroke-linecap="round" stroke-width="3"></path>
+                            <!-- Loss Line (Dotted Orange) -->
+                            <path class="dotted-line" d="M0,50 Q100,80 200,120 T400,180 T600,230 T800,260" fill="none"
+                                stroke="#fb923c" stroke-linecap="round" stroke-width="2"></path>
+                        </svg>
+                        <!-- X-Axis Labels -->
+                        <div class="flex justify-between pt-4 border-t border-slate-100 mt-2">
+                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Epoch 0</span>
+                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Epoch 20</span>
+                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Epoch 40</span>
+                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Epoch 60</span>
+                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Epoch 80</span>
+                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Epoch
+                                100</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Parameters Summary Panel -->
+                <div class="lg:col-span-1 flex flex-col gap-4">
+                    <div class="bg-white rounded-xl border border-primary/10 p-5 shadow-sm">
+                        <h3 class="text-slate-900 font-bold text-sm mb-4 uppercase tracking-wider">Active Parameters
+                        </h3>
+                        <div class="space-y-4">
+                            <div
+                                class="flex justify-between items-center p-3 rounded-lg bg-slate-50 border border-slate-100">
+                                <span class="text-slate-500 text-xs font-medium">Batch Size</span>
+                                <span class="text-primary font-bold">32</span>
+                            </div>
+                            <div
+                                class="flex justify-between items-center p-3 rounded-lg bg-slate-50 border border-slate-100">
+                                <span class="text-slate-500 text-xs font-medium">Learning Rate</span>
+                                <span class="text-primary font-bold">0.001</span>
+                            </div>
+                            <div
+                                class="flex justify-between items-center p-3 rounded-lg bg-slate-50 border border-slate-100">
+                                <span class="text-slate-500 text-xs font-medium">Optimizer</span>
+                                <span class="text-primary font-bold">Adam</span>
+                            </div>
+                            <div
+                                class="flex justify-between items-center p-3 rounded-lg bg-slate-50 border border-slate-100">
+                                <span class="text-slate-500 text-xs font-medium">Augmentation</span>
+                                <span
+                                    class="text-green-600 font-bold text-[10px] bg-green-100 px-2 py-0.5 rounded-full uppercase">Enabled</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-primary rounded-xl p-5 shadow-lg text-white">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="material-symbols-outlined text-sm">memory</span>
+                            <span class="text-xs font-semibold uppercase">Hardware Usage</span>
+                        </div>
+                        <div class="space-y-3">
+                            <div>
+                                <div class="flex justify-between text-[10px] mb-1">
+                                    <span>GPU Utilization</span>
+                                    <span>88%</span>
+                                </div>
+                                <div class="w-full bg-white/20 rounded-full h-1.5 overflow-hidden">
+                                    <div class="bg-white h-full" style="width: 88%;"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-[10px] mb-1">
+                                    <span>VRAM (12.4GB / 16GB)</span>
+                                    <span>77%</span>
+                                </div>
+                                <div class="w-full bg-white/20 rounded-full h-1.5 overflow-hidden">
+                                    <div class="bg-white h-full" style="width: 77%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Scrolling Console Log Window -->
+            <div
+                class="bg-[#1e1e2e] rounded-xl border border-slate-800 flex flex-col h-[280px] shadow-2xl overflow-hidden">
+                <div class="bg-[#2b2b3b] px-4 py-2 flex items-center justify-between border-b border-slate-800">
+                    <div class="flex items-center gap-2">
+                        <div class="flex gap-1.5 mr-2">
+                            <div class="size-2.5 rounded-full bg-red-500/50"></div>
+                            <div class="size-2.5 rounded-full bg-yellow-500/50"></div>
+                            <div class="size-2.5 rounded-full bg-green-500/50"></div>
+                        </div>
+                        <span class="material-symbols-outlined text-slate-400 text-sm">terminal</span>
+                        <span class="text-xs font-medium text-slate-300 font-mono">system_logs:
+                            ~ResNet50_training.log</span>
+                    </div>
+                    <div class="flex gap-4">
+                        <button class="text-slate-500 hover:text-white transition-colors">
+                            <span class="material-symbols-outlined text-sm">download</span>
+                        </button>
+                        <button class="text-slate-500 hover:text-white transition-colors">
+                            <span class="material-symbols-outlined text-sm">content_copy</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="flex-1 overflow-y-auto p-4 font-mono text-xs custom-scrollbar space-y-1">
+                    <p class="text-slate-500">[14:15:32] <span class="text-primary/70">INFO:</span> Initializing weights
+                        from ImageNet pre-trained checkpoint...</p>
+                    <p class="text-slate-500">[14:15:45] <span class="text-primary/70">INFO:</span> Successfully
+                        connected to GPU Cluster Nodes (4x NVIDIA A100)</p>
+                    <p class="text-slate-500">[14:16:01] <span class="text-green-500">SUCCESS:</span> Pipeline start
+                        triggered for ResNet-50 v2</p>
+                    <p class="text-slate-400">[14:16:10] Epoch 1: loss=0.8241, accuracy=0.4512 - 42s/epoch</p>
+                    <p class="text-slate-400">[14:16:52] Epoch 2: loss=0.7912, accuracy=0.4921 - 41s/epoch</p>
+                    <p class="text-slate-400">[14:17:33] Epoch 3: loss=0.7104, accuracy=0.5532 - 41s/epoch</p>
+                    <p class="text-slate-400">[14:25:01] ... (skipped 40 epochs)</p>
+                    <p class="text-slate-400">[14:38:22] Epoch 43: loss=0.2581, accuracy=0.8991 - 40s/epoch</p>
+                    <p class="text-slate-400">[14:39:02] Epoch 44: loss=0.2412, accuracy=0.9056 - 40s/epoch</p>
+                    <p class="text-white bg-primary/20 rounded px-1 -mx-1">[14:39:42] Epoch 45: loss=0.2341,
+                        accuracy=0.9122 - 39s/epoch <span class="ml-2 animate-pulse">▊</span></p>
+                    <p class="text-slate-500 italic">Streaming logs from worker_node_02...</p>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

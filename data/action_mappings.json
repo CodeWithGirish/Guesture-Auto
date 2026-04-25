@@ -1,0 +1,42 @@
+[
+    {
+        "gesture_name": "four",
+        "target_app": "Global",
+        "action_type": "Play / Pause",
+        "system_category": "Media Control",
+        "mapping_mode": "System Level",
+        "detection_delay_ms": 250
+    },
+    {
+        "gesture_name": "good",
+        "target_app": "YouTube",
+        "action_type": "Open Application",
+        "system_category": "Application Control",
+        "mapping_mode": "System Level",
+        "detection_delay_ms": 250
+    },
+    {
+        "gesture_name": "three",
+        "target_app": "Global",
+        "action_type": "Enter",
+        "system_category": "Keyboard Shortcuts",
+        "mapping_mode": "System Level",
+        "detection_delay_ms": 250
+    },
+    {
+        "gesture_name": "plam",
+        "target_app": "Global",
+        "action_type": "Right click",
+        "system_category": "Mouse Control",
+        "mapping_mode": "System Level",
+        "detection_delay_ms": 250
+    },
+    {
+        "gesture_name": "thumbdown",
+        "target_app": "Google Gemini",
+        "action_type": "Save (Ctrl+S)",
+        "system_category": "",
+        "mapping_mode": "Application Level",
+        "detection_delay_ms": 250
+    }
+]

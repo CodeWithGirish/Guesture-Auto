@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Hand Gesture Automation - Action Mapping</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1a227f",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#121320",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+    <!-- Main Container -->
+    <div class="flex flex-col min-h-screen">
+        <!-- Top Navigation Bar -->
+        <header class="sticky top-0 z-50 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+            <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center h-16 gap-8">
+                    <!-- Logo Section -->
+                    <div class="flex items-center gap-3">
+                        <div class="bg-primary p-1.5 rounded-lg text-white">
+                            <span class="material-symbols-outlined block">back_hand</span>
+                        </div>
+                        <h1 class="text-lg font-bold tracking-tight text-primary">GuestureAuto<span
+                                class="text-slate-500 font-normal"></span></h1>
+                    </div>
+                    <!-- Desktop Navigation Links -->
+                    <nav class="hidden md:flex space-x-8">
+                        <a class="text-slate-500 hover:text-primary dark:hover:text-white px-1 py-2 text-sm font-medium transition-colors"
+                            href="..\1_Dashboard and Profile\User Dashboard Screen.html">Dashboard</a>
+                        <a class="text-primary dark:text-white border-b-2 border-primary px-1 py-2 text-sm font-semibold"
+                            href="#">Mapped Actions</a>
+                        <a class="text-slate-500 hover:text-primary dark:hover:text-white px-1 py-2 text-sm font-medium transition-colors"
+                            href="..\3_Action Mapping\2_Create Mapping Screen.html">Create Mapping</a>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        <template id="mapping-item-template">
+            <div class="mapping-item bg-white p-4 rounded-lg border border-slate-200 flex justify-between items-center">
+                <div>
+                    <h4 class="app-name font-bold text-slate-900"></h4>
+                    <p class="mapping-details text-xs text-slate-500"></p>
+                </div>
+                <button class="delete-mapping-btn text-red-500 hover:bg-red-50 p-2 rounded">
+                    <span class="material-symbols-outlined">delete</span>
+                </button>
+            </div>
+        </template>
+        <!-- Main Content Area -->
+        <main class="flex-1 max-w-[1440px] mx-auto w-full px-6 py-8">
+            <!-- Page Header -->
+            <div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div>
+                    <h2 class="text-3xl font-black text-primary dark:text-white tracking-tight">Action Mapping</h2>
+                    <p class="text-slate-500 dark:text-slate-400 mt-1">Configure and manage your gesture-to-command
+                        shortcuts for maximum productivity.</p>
+                </div>
+                <button onclick="window.location.href='2_Create Mapping Screen.html'"
+                    class="bg-primary hover:bg-primary/90 text-white px-5 py-2.5 rounded-lg font-bold text-sm flex items-center gap-2 shadow-sm transition-all active:scale-95">
+                    <span class="material-symbols-outlined text-xl">add_box</span>
+                    New Mapping
+                </button>
+            </div>
+            <!-- Filters and Search Bar -->
+            <div
+                class="bg-white dark:bg-background-dark/50 border border-slate-200 dark:border-slate-800 rounded-xl p-4 mb-6 shadow-sm flex flex-col md:flex-row gap-4">
+                <div class="flex-1 relative">
+                    <span
+                        class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+                    <input id="mapping-search" onkeyup="filterMappings()"
+                        class="w-full pl-10 pr-4 py-2 border-slate-200 dark:border-slate-700 dark:bg-slate-800/50 rounded-lg text-sm focus:ring-primary focus:border-primary"
+                        placeholder="Search gestures, actions, or target apps..." type="text" />
+                </div>
+                <div class="flex flex-wrap gap-3">
+                    <select id="mapping-status-filter"
+                        class="border-slate-200 dark:border-slate-700 dark:bg-slate-800/50 rounded-lg text-sm focus:ring-primary focus:border-primary px-4 pr-10 min-w-[140px]">
+                        <option value="All">All Statuses</option>
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
+                    </select>
+                </div>
+            </div>
+            <!-- Data Table -->
+            <div
+                class="bg-white dark:bg-background-dark/30 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr
+                                class="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800">
+                                <th
+                                    class="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                                    <div class="flex items-center gap-1 cursor-pointer hover:text-primary">
+                                        Gesture <span class="material-symbols-outlined text-sm">arrow_drop_down</span>
+                                    </div>
+                                </th>
+                                <th
+                                    class="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                                    <div class="flex items-center gap-1 cursor-pointer hover:text-primary">
+                                        Action Type <span class="material-symbols-outlined text-sm">swap_vert</span>
+                                    </div>
+                                </th>
+                                <th
+                                    class="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                                    Target App</th>
+                                <th
+                                    class="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                                    Delay</th>
+                                <th
+                                    class="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                                    Status</th>
+                                <th
+                                    class="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider text-right">
+                                    Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="mapped-actions-tbody" class="divide-y divide-slate-100 dark:divide-slate-800">
+                        </tbody>
+                    </table>
+                    <template id="mapping-empty-template">
+                        <tr>
+                            <td colspan="6" class="text-center py-8 text-slate-500">Loading mappings...</td>
+                        </tr>
+                        <tr>
+                            <td colspan="6"
+                                class="px-6 py-12 text-center text-slate-500 border-b border-slate-100 dark:border-slate-800">
+                                <div class="flex flex-col items-center justify-center">
+                                    <span
+                                        class="material-symbols-outlined text-4xl mb-3 text-slate-300 dark:text-slate-600">link_off</span>
+                                    <p class="font-bold text-slate-700 dark:text-slate-300 text-lg">No Mappings Found
+                                    </p>
+                                    <p class="text-sm mt-1 mb-4 max-w-sm">You haven't connected any gestures to system
+                                        actions yet.</p>
+                                    <button onclick="window.location.href='2_Create Mapping Screen.html'"
+                                        class="px-5 py-2 bg-primary/10 text-primary hover:bg-primary/20 font-bold text-sm rounded-lg transition-colors">
+                                        Create First Mapping
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </template>
+
+                    <template id="mapping-row-template">
+                        <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors group">
+                            <td class="px-6 py-4">
+                                <div class="flex items-center gap-3">
+                                    <div
+                                        class="w-10 h-10 rounded bg-primary/10 dark:bg-primary/20 flex items-center justify-center text-primary border border-primary/20 overflow-hidden">
+                                        <img class="row-gesture-img w-full h-full object-cover hidden" src=""
+                                            alt="Gesture Thumbnail" />
+                                        <span class="row-gesture-icon material-symbols-outlined">front_hand</span>
+                                    </div>
+                                    <div>
+                                        <p
+                                            class="row-gesture-name text-sm font-semibold text-slate-900 dark:text-white">
+                                        </p>
+                                        <p class="row-mapping-mode text-[11px] text-slate-500"></p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 text-sm">
+                                <span
+                                    class="row-action-type px-2.5 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-[11px] font-bold uppercase tracking-tight"></span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-sm text-slate-400">widgets</span>
+                                    <span class="row-target-app text-sm text-slate-600 dark:text-slate-300"></span>
+                                </div>
+                            </td>
+                            <td class="row-delay px-6 py-4 text-sm text-slate-500"></td>
+                            <td class="px-6 py-4">
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input checked class="row-status-toggle sr-only peer" type="checkbox" />
+                                    <div
+                                        class="w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-green-500">
+                                    </div>
+                                </label>
+                            </td>
+                            <td class="px-6 py-4 text-right">
+                                <div
+                                    class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <button
+                                        class="row-delete-btn p-1.5 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                                        title="Delete">
+                                        <span class="material-symbols-outlined text-[20px]">delete</span>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </template>
+                </div>
+                <!-- Pagination/Footer -->
+                <div id="pagination-container"
+                    class="hidden bg-slate-50 dark:bg-slate-800/30 px-6 py-4 flex items-center justify-between border-t border-slate-200 dark:border-slate-800">
+                    <p id="pagination-text" class="text-sm text-slate-500">Showing <span
+                            class="font-semibold text-slate-900 dark:text-white">1</span> to <span
+                            class="font-semibold text-slate-900 dark:text-white">4</span> of <span
+                            class="font-semibold text-slate-900 dark:text-white">0</span> mappings</p>
+                    <div class="flex items-center gap-2">
+                        <button id="pagination-prev"
+                            class="p-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-white dark:hover:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed">
+                            <span class="material-symbols-outlined text-sm">chevron_left</span>
+                        </button>
+                        <button id="pagination-next"
+                            class="p-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-white dark:hover:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed">
+                            <span class="material-symbols-outlined text-sm">chevron_right</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <script src="action_mapping_logic.js"></script>
+        </main>
+    </div>
+</body>
+
+</html>

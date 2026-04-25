@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>AI Lab - Training Configuration</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1a227f",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#121320",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .slider-thumb::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            background: #1a227f;
+            cursor: pointer;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-[#0f101a] font-display min-h-screen">
+    <div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+        <div class="layout-container flex h-full grow flex-col">
+            <!-- Top Navigation Bar -->
+            <header
+                class="sticky top-0 z-50 bg-white dark:bg-background-dark border-b border-slate-200 dark:border-slate-800">
+                <div class="max-w-[1440px] mx-auto px-6 h-16 flex items-center justify-between">
+                    <div class="flex items-center gap-8">
+                        <div class="flex items-center gap-3 text-primary">
+                            <div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+                                <span class="material-symbols-outlined text-xl">layers</span>
+                            </div>
+                            <h1 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">GuestureAuto
+                            </h1>
+                        </div>
+                        <nav class="hidden md:flex items-center gap-6">
+                            <a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors"
+                                href="..\2_Image Augumentation\Dataset Overview Screen.html">Dataset
+                                Hub</a>
+                            <a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors border-b-2 border-primary pb-1 pt-1"
+                                href="#"
+                                onclick="switchTab('tab-config', 'Training Configuration', 'Fine-tune your hyperparameters and model architecture for optimal performance.', 'nav-config'); return false;">Model
+                                Training</a>
+                            <a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors"
+                                href="..\5_deployment_&_version_control\Deploy Version Screen.html">Deployments</a>
+
+                        </nav>
+                    </div>
+                    <!-- Actions & Profile -->
+                    <div class="flex items-center gap-4">
+                        <div class="h-8 w-px bg-slate-200 dark:bg-slate-700"></div>
+                        <div class="flex items-center gap-3 ml-2 cursor-pointer group">
+                            <div class="size-9 rounded-full bg-slate-200 overflow-hidden border border-slate-200">
+                                <img alt="Profile" class="w-full h-full object-cover"
+                                    data-alt="Portrait of a professional ML researcher"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTt8V4eQVjA9lvtEpDuQDkLU10eshiSR3m167zH__Z9n_2MCcie4BjvKARyDFOl-a8rofCvSoYhL40vMoFt0FmxCXozXN2B7TjOu4044VOxIex560sfML5uOZ85-xu8k85rpTW5Sp-4OXlrsMnPd_vee6TkT-fBCJEWP-jlVIjnuIyZXyKFluKF3oNXzKFYiir4Xdk_l4L7MLHNVPA_YQYrN4IRRJGp9uiTvuaAyuhw-Iw_7vwux0WxOe6ttjn8HbJQZx0qxpsRMRM" />
+                            </div>
+                            <div class="hidden lg:block text-left leading-tight">
+                                <p
+                                    class="text-sm font-semibold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
+                                    Dr. Aris Thorne</p>
+                                <p class="text-xs text-slate-500">Admin</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <main class="flex-1 flex flex-col max-w-[1440px] mx-auto w-full px-6 py-6">
+                <!-- Page Header -->
+                <div>
+
+                    <div class="flex items-center justify-between mb-8">
+                        <div class="flex flex-col gap-2">
+                            <div>
+                                <h2 id="page-title" class="text-2xl font-bold text-slate-900 dark:text-white">Training
+                                    Configuration</h2>
+                                <p id="page-desc" class="text-[#555a91] text-base font-normal">Fine-tune your
+                                    hyperparameters and model architecture for optimal performance.</p>
+                            </div>
+                        </div>
+                        <!-- Dynamic Header Actions based on selected Tab -->
+                        <div id="tab-config-actions" class="header-actions"></div>
+                        <div id="tab-train-actions" class="header-actions hidden flex gap-2">
+                            <button onclick="stopTrainingProcess()"
+                                class="px-4 py-2 rounded-lg border border-red-200 text-red-600 bg-red-50 hover:bg-red-100 text-sm font-semibold transition-all flex items-center gap-2">
+                                <span class="material-symbols-outlined text-lg">stop_circle</span> Stop Training
+                            </button>
+                        </div>
+                        <div id="tab-eval-actions" class="header-actions hidden flex gap-3">
+                            <button
+                                class="flex items-center justify-center rounded-lg h-11 border-2 border-primary text-primary hover:bg-primary/5 gap-2 text-sm font-bold px-5 transition-all">
+                                <span class="material-symbols-outlined text-[20px]">download</span> Export Model
+                            </button>
+                            <button
+                                class="flex items-center justify-center rounded-lg h-11 bg-primary text-white hover:bg-primary/90 gap-2 text-sm font-bold px-6 shadow-lg shadow-primary/20 transition-all">
+                                <span class="material-symbols-outlined text-[20px]">description</span> Generate Full
+                                Report
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Tabs -->
+                <div class="border-b border-[#d2d4e5] mb-8">
+                    <div class="flex gap-10">
+                        <a id="nav-config"
+                            class="nav-link flex flex-col items-center justify-center border-b-[3px] border-primary text-primary pb-4 pt-2 group"
+                            href="#"
+                            onclick="switchTab('tab-config', 'Training Configuration', 'Fine-tune your hyperparameters and model architecture for optimal performance.', 'nav-config'); return false;">
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-[20px]">tune</span>
+                                <p class="text-sm font-bold tracking-[0.015em]">Training Configuration</p>
+                            </div>
+                        </a>
+                        <a id="nav-train"
+                            class="nav-link flex flex-col items-center justify-center border-b-[3px] border-transparent text-[#555a91] pb-4 pt-2 hover:text-primary transition-all"
+                            href="#"
+                            onclick="switchTab('tab-train', 'Training Analysis', 'Monitor model training performance in real-time.', 'nav-train'); return false;">
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-[20px]">monitoring</span>
+                                <p class="text-sm font-bold tracking-[0.015em]">Live Training</p>
+                            </div>
+                        </a>
+                        <a id="nav-eval"
+                            class="nav-link flex flex-col items-center justify-center border-b-[3px] border-transparent text-[#555a91] pb-4 pt-2 hover:text-primary transition-all"
+                            href="#"
+                            onclick="switchTab('tab-eval', 'Evaluation Summary', 'Detailed performance analysis for Model MOD-88291.', 'nav-eval'); return false;">
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-[20px]">analytics</span>
+                                <p class="text-sm font-bold tracking-[0.015em]">Evaluation Results</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="tab-config" class="tab-page">
+                    <!-- Main Grid -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+                        <!-- Form Section -->
+                        <div class="lg:col-span-2 space-y-8">
+                            <!-- Section 1: General Settings -->
+                            <div class="bg-white p-6 rounded-xl border border-[#e9e9f2] shadow-sm">
+                                <div class="flex items-center gap-2 mb-6 text-primary">
+                                    <span class="material-symbols-outlined">settings_suggest</span>
+                                    <h3 class="text-lg font-bold">General Settings</h3>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div class="flex flex-col gap-2">
+                                        <label class="text-sm font-bold text-[#0f101a] flex items-center gap-1">
+                                            Model Architecture
+                                            <span
+                                                class="material-symbols-outlined text-[14px] text-[#555a91] cursor-help"
+                                                title="Select the base model structure">info</span>
+                                        </label>
+                                        <select id="model-architecture"
+                                            class="form-select w-full bg-background-light border-none rounded-lg h-11 text-sm focus:ring-2 focus:ring-primary/20">
+                                            <option>Select Model</option>
+                                            <option value="CNN + LSTM">CNN + LSTM</option>
+                                            <option value="CNN + RNN">CNN + RNN</option>
+                                        </select>
+                                    </div>
+                                    <div class="flex flex-col gap-2">
+                                        <label class="text-sm font-bold text-[#0f101a]">Experiment Name</label>
+                                        <input id="experiment-name"
+                                            class="form-input w-full bg-background-light border-none rounded-lg h-11 text-sm focus:ring-2 focus:ring-primary/20"
+                                            type="text" placeholder="Enter Training Session Name" />
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Section 2: Hyperparameters -->
+                            <div class="bg-white p-6 rounded-xl border border-[#e9e9f2] shadow-sm">
+                                <div class="flex items-center gap-2 mb-6 text-primary">
+                                    <span class="material-symbols-outlined">science</span>
+                                    <h3 class="text-lg font-bold">Hyperparameters</h3>
+                                </div>
+                                <div class="space-y-8">
+                                    <!-- Epochs and Batch Size -->
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div class="flex flex-col gap-2">
+                                            <label class="text-sm font-bold text-[#0f101a]">Epochs</label>
+                                            <input id="training-epochs"
+                                                class="form-input w-full bg-background-light border-none rounded-lg h-11 text-sm focus:ring-2 focus:ring-primary/20"
+                                                type="number" placeholder="Enter Epoches" />
+                                        </div>
+                                        <div class="flex flex-col gap-2">
+                                            <label class="text-sm font-bold text-[#0f101a]">Batch Size</label>
+                                            <select id="batch-size"
+                                                class="form-select w-full bg-background-light border-none rounded-lg h-11 text-sm focus:ring-2 focus:ring-primary/20">
+                                                <option>Select Batch Size</option>
+                                                <option value="32">32</option>
+                                                <option value="64">64</option>
+                                                <option value="128">128</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!-- Learning Rate Slider -->
+                                    <div class="flex flex-col gap-4">
+                                        <div class="flex justify-between items-center">
+                                            <label class="text-sm font-bold text-[#0f101a] flex items-center gap-1">
+                                                Learning Rate
+                                                <span
+                                                    class="material-symbols-outlined text-[14px] text-[#555a91] cursor-help"
+                                                    title="Controls how much to change the model in response to the estimated error">info</span>
+                                            </label>
+                                            <span id="lr-badge"
+                                                class="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold tracking-wider">0.001</span>
+                                        </div>
+                                        <div class="flex items-center gap-4">
+                                            <input id="lr-slider"
+                                                class="w-full h-2 bg-primary/20 rounded-lg appearance-none cursor-pointer slider-thumb"
+                                                oninput="syncLR(this.value)" type="range" value="0.001" />
+                                            <input id="lr-text"
+                                                class="w-20 text-center bg-background-light border-none rounded-lg h-10 text-xs font-bold focus:ring-2 focus:ring-primary/20"
+                                                type="text" value="0.001" onchange="syncLR(this.value)" />
+                                        </div>
+                                    </div>
+                                    <div id="save-toast"
+                                        class="hidden fixed bottom-10 right-10 flex items-center gap-3 bg-emerald-500 text-white px-6 py-4 rounded-xl shadow-2xl z-[100]">
+                                        <span class="material-symbols-outlined">check_circle</span>
+                                        <p id="toast-msg" class="font-bold text-sm"></p>
+                                    </div>
+                                    <!-- Optimizer Segmented Buttons -->
+                                    <div class="flex flex-col gap-3">
+                                        <label class="text-sm font-bold text-[#0f101a]">Optimizer</label>
+                                        <div id="optimizer-container"
+                                            class="flex p-1 bg-background-light rounded-lg w-full md:w-fit">
+                                            <button
+                                                class="px-6 py-2 rounded-md bg-primary text-white text-sm font-bold shadow-sm">Adam</button>
+                                            <button
+                                                class="px-6 py-2 rounded-md text-[#555a91] text-sm font-bold hover:bg-white/50 transition-colors">SGD</button>
+                                            <button
+                                                class="px-6 py-2 rounded-md text-[#555a91] text-sm font-bold hover:bg-white/50 transition-colors">RMSProp</button>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-4 ml-auto">
+                                        <span class="text-sm font-bold text-[#555a91]">Augmentation:</span>
+                                        <label class="relative inline-flex items-center cursor-pointer">
+                                            <input type="checkbox" id="aug-toggle" class="sr-only peer" checked>
+                                            <div
+                                                class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-500">
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Sidebar / Summary Section -->
+                        <div class="space-y-6 sticky top-24">
+                            <!-- Action Buttons -->
+                            <div class="flex flex-col gap-3 pt-4">
+                                <button onclick="startTrainingProcess()"
+                                    class="w-full bg-primary text-white h-12 rounded-lg font-bold text-base hover:bg-primary/90 transition-all shadow-md flex items-center justify-center gap-2">
+                                    <span class="material-symbols-outlined text-[20px]">rocket_launch</span>
+                                    Start Training Run
+                                </button>
+                                <button onclick="saveTrainingConfig()"
+                                    class="w-full bg-primary text-white h-12 rounded-lg font-bold text-base hover:bg-primary/90 transition-all shadow-md flex items-center justify-center gap-2">
+                                    <span class="material-symbols-outlined text-[20px]">save</span>
+                                    Save Configuration
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="tab-train" class="tab-page hidden">
+                    <!-- Progress Section -->
+                    <div class="bg-white rounded-xl border border-primary/10 p-5 mb-6 shadow-sm">
+                        <div class="flex justify-between text-sm font-medium mb-2 text-[#555a91]">
+                            <span id="training-epoch-text">Epoch 0 / --</span>
+                            <span id="training-progress-text">0%</span>
+                        </div>
+                        <div class="w-full bg-slate-200 rounded-full h-2">
+                            <div id="training-progress-fill"
+                                class="bg-primary h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <!-- Main Content Grid -->
+                    <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-6">
+                        <!-- Real-time Graph Card -->
+                        <div
+                            class="lg:col-span-3 bg-white rounded-xl border border-primary/10 p-6 shadow-sm flex flex-col">
+                            <div class="flex justify-between items-center mb-6">
+                                <div>
+                                    <h3 class="text-slate-900 font-bold text-lg">Training Metrics</h3>
+                                    <p class="text-slate-500 text-xs">Real-time performance monitoring</p>
+                                </div>
+                                <div class="flex items-center gap-4">
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-3 h-3 rounded-sm bg-primary"></span>
+                                        <span class="text-xs font-medium text-slate-600">Accuracy (<span
+                                                id="live-accuracy">--</span>)</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <span
+                                            class="w-3 h-3 rounded-sm bg-orange-400 border border-orange-400 border-dashed"></span>
+                                        <span class="text-xs font-medium text-slate-600">Loss (<span
+                                                id="live-loss">--</span>)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex-1 min-h-[320px] relative w-full h-full">
+                                <canvas id="live-training-chart"></canvas>
+                            </div>
+                        </div>
+                        <!-- Parameters Summary Panel -->
+                        <div class="lg:col-span-1 flex flex-col gap-4">
+                            <div class="bg-white rounded-xl border border-primary/10 p-5 shadow-sm">
+                                <h3 class="text-slate-900 font-bold text-sm mb-4 uppercase tracking-wider">Active
+                                    Parameters</h3>
+                                <div class="space-y-4">
+                                    <div
+                                        class="flex justify-between items-center p-3 rounded-lg bg-slate-50 border border-slate-100">
+                                        <span class="text-slate-500 text-xs font-medium">Epochs</span>
+                                        <span id="live-epochs" class="text-primary font-bold">--</span>
+                                    </div>
+                                    <div
+                                        class="flex justify-between items-center p-3 rounded-lg bg-slate-50 border border-slate-100">
+                                        <span class="text-slate-500 text-xs font-medium">Batch Size</span>
+                                        <span id="live-batch-size" class="text-primary font-bold">--</span>
+                                    </div>
+                                    <div
+                                        class="flex justify-between items-center p-3 rounded-lg bg-slate-50 border border-slate-100">
+                                        <span class="text-slate-500 text-xs font-medium">Learning Rate</span>
+                                        <span id="live-lr" class="text-primary font-bold">--</span>
+                                    </div>
+                                    <div
+                                        class="flex justify-between items-center p-3 rounded-lg bg-slate-50 border border-slate-100">
+                                        <span class="text-slate-500 text-xs font-medium">Optimizer</span>
+                                        <span id="live-optimizer" class="text-primary font-bold">--</span>
+                                    </div>
+                                    <div
+                                        class="flex justify-between items-center p-3 rounded-lg bg-slate-50 border border-slate-100">
+                                        <span class="text-slate-500 text-xs font-medium">Augmentation</span>
+                                        <span id="live-augmentation"
+                                            class="text-primary font-bold text-[10px] uppercase">--</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Scrolling Console Log Window -->
+                    <div
+                        class="bg-[#1e1e2e] rounded-xl border border-slate-800 flex flex-col h-[280px] shadow-2xl overflow-hidden">
+                        <div class="bg-[#2b2b3b] px-4 py-2 flex items-center justify-between border-b border-slate-800">
+                            <div class="flex items-center gap-2">
+                                <div class="flex gap-1.5 mr-2">
+                                    <div class="size-2.5 rounded-full bg-red-500/50"></div>
+                                    <div class="size-2.5 rounded-full bg-yellow-500/50"></div>
+                                    <div class="size-2.5 rounded-full bg-green-500/50"></div>
+                                </div>
+                                <span class="material-symbols-outlined text-slate-400 text-sm">terminal</span>
+                                <span class="text-xs font-medium text-slate-300 font-mono">system_logs:
+                                    ~ResNet50_training.log</span>
+                            </div>
+                        </div>
+                        <div class="flex-1 overflow-y-auto p-4 font-mono text-xs custom-scrollbar space-y-1">
+                            <div id="training-console-output"
+                                class="flex-1 overflow-y-auto p-4 font-mono text-xs custom-scrollbar space-y-1">
+                                <p class="text-slate-500 italic">Waiting for training to start...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="tab-eval" class="tab-page hidden">
+                    <!-- KPI Metric Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div
+                            class="bg-white rounded-xl p-6 border border-primary/10 shadow-sm flex items-center justify-between">
+                            <div>
+                                <p class="text-slate-500 text-sm font-semibold uppercase tracking-wider">Precision</p>
+                                <p id="eval-precision" class="text-3xl font-black text-primary mt-1">--%</p>
+                                <div class="flex items-center gap-1 mt-2 text-emerald-600 font-bold text-sm">
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="bg-white rounded-xl p-6 border border-primary/10 shadow-sm flex items-center justify-between">
+                            <div>
+                                <p class="text-slate-500 text-sm font-semibold uppercase tracking-wider">Recall</p>
+                                <p id="eval-recall" class="text-3xl font-black text-primary mt-1">--%</p>
+                                <div class="flex items-center gap-1 mt-2 text-rose-500 font-bold text-sm">
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="bg-white rounded-xl p-6 border border-primary/10 shadow-sm flex items-center justify-between">
+                            <div>
+                                <p class="text-slate-500 text-sm font-semibold uppercase tracking-wider">F1 Score</p>
+                                <p id="eval-f1" class="text-3xl font-black text-primary mt-1">--%</p>
+                                <div class="flex items-center gap-1 mt-2 text-emerald-600 font-bold text-sm">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Detailed Analysis Section -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                        <!-- Confusion Matrix -->
+                        <div class="bg-white rounded-xl p-6 border border-primary/10 shadow-sm">
+                            <div class="flex justify-between items-center mb-6">
+                                <h3 class="text-lg font-bold text-primary">Confusion Matrix</h3>
+                                <div class="flex items-center gap-2">
+                                    <span class="size-3 bg-primary rounded-full"></span>
+                                    <span class="text-xs font-medium text-slate-500">Predicted Values</span>
+                                </div>
+                            </div>
+                            <div id="confusion-matrix-grid"
+                                class="flex items-center justify-center h-[200px] text-slate-400 text-sm font-medium italic border border-dashed border-slate-200 rounded-lg">
+                                Matrix will generate after training completes...
+                            </div>
+                            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                                <p class="text-xs text-slate-400 italic">Values represent sample count in validation set
+                                    (n=1,795)</p>
+                                <div class="flex items-center gap-1">
+                                    <span class="text-xs font-bold text-slate-500">93.5% Accuracy Overall</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Performance Chart -->
+                        <div class="bg-white rounded-xl p-6 border border-primary/10 shadow-sm">
+                            <div class="relative h-[240px] w-full mt-4">
+                                <canvas id="eval-accuracy-chart"></canvas>
+                            </div>
+                            <div class="mt-6 pt-4 border-t border-slate-100 grid grid-cols-2 gap-4">
+                                <div class="text-center">
+                                    <p class="text-[10px] text-slate-400 uppercase font-bold">Final Training Acc</p>
+                                    <p id="eval-final-train-acc" class="text-lg font-bold text-primary">--</p>
+                                </div>
+                                <div class="text-center">
+                                    <p class="text-[10px] text-slate-400 uppercase font-bold">Final Validation Acc</p>
+                                    <p id="eval-final-val-acc" class="text-lg font-bold text-primary">--</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script src="model_training_logic.js"></script>
+            </main>
+            <!-- Footer-like padding -->
+            <div class="py-10"></div>
+        </div>
+    </div>
+</body>
+
+</html>

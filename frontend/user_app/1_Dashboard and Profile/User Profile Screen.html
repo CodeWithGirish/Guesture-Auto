@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>User Profile - Hand Gesture Automation</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1a227f",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#121320",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+    <!-- Top Navigation Bar -->
+    <header
+        class="sticky top-0 z-50 w-full bg-white dark:bg-background-dark border-b border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo & Nav Links -->
+                <div class="flex items-center gap-8">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-primary rounded-lg text-white">
+                            <span class="material-symbols-outlined block">gesture</span>
+                        </div>
+                        <h1 class="text-primary dark:text-white text-lg font-bold tracking-tight">GestureAuto</h1>
+                    </div>
+                    <nav class="hidden md:flex items-center gap-6">
+                        <a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-white text-sm font-medium transition-colors"
+                            href="../1_Dashboard and Profile/User Dashboard Screen.html">Dashboard</a>
+                        <a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-white text-sm font-medium transition-colors"
+                            href="../2_Gusture Module/1_Saved Guesture Screen.html">Gesture Module</a>
+                        <a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-white text-sm font-medium transition-colors"
+                            href="../3_Action Mapping/1_Action Mapping Screen.html">Action Mapping</a>
+                        <a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-white text-sm font-medium transition-colors"
+                            href="../4_Integration/1_Apllications Integration Screen.html">Integrations</a>
+                    </nav>
+                </div>
+                <!-- Search & Profile -->
+                <div class="flex items-center gap-4">
+                    <div class="hidden sm:flex relative">
+                        <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
+                            <span class="material-symbols-outlined text-sm">search</span>
+                        </span>
+                        <input
+                            class="block w-64 pl-10 pr-3 py-2 border-none bg-slate-100 dark:bg-slate-800 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 transition-all"
+                            placeholder="Search operations..." type="text" />
+                    </div>
+                    <div class="h-10 w-10 rounded-full bg-primary/10 border-2 border-primary/20 overflow-hidden">
+                        <img class="w-full h-full object-cover" data-alt="Close up portrait of Alex Rivers"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNxDBFRag6Klj3TLeFRXDlXyABh2YIyonsjgSTcHdDGSnjLQ8twUEiW_FPBS6XBjSIYsGivWfJyI1UdH4SR_XHMAsDGEXGXQYCwaFU760zdIMXZNRBvuwxINrcOPKmj-t4JX5-ird-KBLbInrfa4RIeofgta9c36P5YjILkr7NStTJ1RECTg3HOS66kolklEpYBAV4lLTlk6DAWMHBmWXtnz_CSKysR7gmUia8ezptVkZJHko-rcY_7z6TndBa693d4M-XHBmpnxLN" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Breadcrumbs -->
+        <nav class="flex mb-8 text-sm font-medium text-slate-500 dark:text-slate-400">
+            <ol class="flex items-center space-x-2">
+                <li><a class="hover:text-primary transition-colors" href="../1_Dashboard and Profile/User Dashboard Screen.html">Home</a></li>
+                <li class="flex items-center space-x-2">
+                    <span class="material-symbols-outlined text-xs">chevron_right</span>
+                    <span class="text-slate-900 dark:text-white">User Profile</span>
+                </li>
+            </ol>
+        </nav>
+        <!-- Profile Header -->
+        <div
+            class="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 p-6 mb-8">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div class="flex items-center gap-6">
+                    <div class="relative group">
+                        <div
+                            class="h-24 w-24 rounded-full bg-slate-200 dark:bg-slate-800 border-4 border-white dark:border-slate-900 shadow-md overflow-hidden">
+                            <img class="w-full h-full object-cover" data-alt="Large profile photo of Alex Rivers"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHTRz4idjNANQkrinoX_b48ECWB2i69q1MqQL30VF62UvRmG01IRf5-WoMPHVCjqVHdduuFjV_5dZNpqk22k-tjAF3gcrULTyOy6sNhWqfphVd1K4eQ0RRpmZGPdvDgN2QXRdicGXu-RB_MCoID22eplcIxdNJ4zxK5lZfqYWyNIU906GKDGy7-RkqJ7tAwC03YD2yTSa8KTq3-Wu-OAJAv7-wdvWEqL_4nvUFLT_NIB0V08Dx97OeaSDUsncPXv5-5HAfY7OaiaSK" />
+                        </div>
+                        <button
+                            class="absolute bottom-0 right-0 p-1.5 bg-primary text-white rounded-full shadow-lg hover:bg-primary/90 transition-all">
+                            <span class="material-symbols-outlined text-sm">photo_camera</span>
+                        </button>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-3 mb-1">
+                            <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Alex Rivers</h2>
+                            <span
+                                class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary text-white uppercase tracking-wider">Enterprise</span>
+                        </div>
+                        <p class="text-slate-600 dark:text-slate-400 font-medium">System Administrator</p>
+                        <p class="text-slate-400 dark:text-slate-500 text-xs mt-1">Member since January 2023</p>
+                    </div>
+                </div>
+                <div class="flex gap-3">
+                    <button
+                        class="flex-1 md:flex-none px-6 py-2 bg-primary text-white rounded-lg text-sm font-semibold hover:shadow-lg hover:shadow-primary/20 transition-all">Edit
+                        Profile</button>
+                </div>
+            </div>
+        </div>
+        <!-- System Statistics -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div
+                class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                <div class="flex items-center gap-4">
+                    <div class="p-3 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded-lg">
+                        <span class="material-symbols-outlined">history</span>
+                    </div>
+                    <div>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 font-medium">Total Sessions</p>
+                        <p class="text-2xl font-bold text-slate-900 dark:text-white">1,240</p>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                <div class="flex items-center gap-4">
+                    <div class="p-3 bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 rounded-lg">
+                        <span class="material-symbols-outlined">bolt</span>
+                    </div>
+                    <div>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 font-medium">Active Automations</p>
+                        <p class="text-2xl font-bold text-slate-900 dark:text-white">12</p>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                <div class="flex items-center gap-4">
+                    <div class="p-3 bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400 rounded-lg">
+                        <span class="material-symbols-outlined">sync</span>
+                    </div>
+                    <div>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 font-medium">Last Sync</p>
+                        <p class="text-2xl font-bold text-slate-900 dark:text-white">2 mins ago</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Left Column: Personal Info & Preferences -->
+            <div class="lg:col-span-2 space-y-8">
+                <!-- Personal Information -->
+                <section
+                    class="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
+                    <div class="p-6 border-b border-slate-100 dark:border-slate-800">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white">Personal Information</h3>
+                        <p class="text-sm text-slate-500">Update your personal details and job information.</p>
+                    </div>
+                    <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Full
+                                Name</label>
+                            <input
+                                class="w-full rounded-lg border-slate-200 dark:border-slate-700 dark:bg-slate-800 focus:ring-primary focus:border-primary transition-all"
+                                type="text" value="Alex Rivers" />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Email
+                                Address</label>
+                            <input
+                                class="w-full rounded-lg border-slate-200 dark:border-slate-700 dark:bg-slate-800 focus:ring-primary focus:border-primary transition-all"
+                                type="email" value="alex.rivers@enterprise-automation.com" />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Phone
+                                Number</label>
+                            <input
+                                class="w-full rounded-lg border-slate-200 dark:border-slate-700 dark:bg-slate-800 focus:ring-primary focus:border-primary transition-all"
+                                type="tel" value="+1 (555) 000-1234" />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Job
+                                Title</label>
+                            <input
+                                class="w-full rounded-lg border-slate-200 dark:border-slate-700 dark:bg-slate-800 focus:ring-primary focus:border-primary transition-all"
+                                type="text" value="Senior Systems Administrator" />
+                        </div>
+                    </div>
+                    <div class="px-6 py-4 bg-slate-50 dark:bg-slate-800/50 flex justify-end">
+                        <button
+                            class="px-4 py-2 bg-primary text-white rounded-lg text-sm font-semibold hover:bg-primary/90 transition-all">Update
+                            Info</button>
+                    </div>
+                </section>
+                <!-- Preferences -->
+                <section
+                    class="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
+                    <div class="p-6 border-b border-slate-100 dark:border-slate-800">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white">Preferences</h3>
+                        <p class="text-sm text-slate-500">Customize your interface and notification experience.</p>
+                    </div>
+                    <div class="p-6 space-y-8">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label
+                                    class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Language</label>
+                                <select
+                                    class="w-full rounded-lg border-slate-200 dark:border-slate-700 dark:bg-slate-800 focus:ring-primary focus:border-primary">
+                                    <option>English (United States)</option>
+                                    <option>Spanish (ES)</option>
+                                    <option>French (FR)</option>
+                                    <option>German (DE)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label
+                                    class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Timezone</label>
+                                <select
+                                    class="w-full rounded-lg border-slate-200 dark:border-slate-700 dark:bg-slate-800 focus:ring-primary focus:border-primary">
+                                    <option>(GMT-08:00) Pacific Time</option>
+                                    <option>(GMT-05:00) Eastern Time</option>
+                                    <option>(GMT+00:00) UTC</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-bold text-slate-900 dark:text-white mb-4">Notification Channels</h4>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <span class="material-symbols-outlined text-slate-400">mail</span>
+                                        <div>
+                                            <p class="text-sm font-semibold text-slate-700 dark:text-slate-300">Email
+                                                Notifications</p>
+                                            <p class="text-xs text-slate-500">Receive summaries and critical alerts via
+                                                email.</p>
+                                        </div>
+                                    </div>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input checked="" class="sr-only peer" type="checkbox" />
+                                        <div
+                                            class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary">
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <span
+                                            class="material-symbols-outlined text-slate-400">notifications_active</span>
+                                        <div>
+                                            <p class="text-sm font-semibold text-slate-700 dark:text-slate-300">In-App
+                                                Alerts</p>
+                                            <p class="text-xs text-slate-500">Get notified within the dashboard
+                                                interface.</p>
+                                        </div>
+                                    </div>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input checked="" class="sr-only peer" type="checkbox" />
+                                        <div
+                                            class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary">
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <span class="material-symbols-outlined text-slate-400">laptop</span>
+                                        <div>
+                                            <p class="text-sm font-semibold text-slate-700 dark:text-slate-300">Desktop
+                                                Push</p>
+                                            <p class="text-xs text-slate-500">System level notifications on your
+                                                workstation.</p>
+                                        </div>
+                                    </div>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input class="sr-only peer" type="checkbox" />
+                                        <div
+                                            class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary">
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <!-- Right Column: Security -->
+            <div class="space-y-8">
+                <!-- Security Section -->
+                <section
+                    class="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
+                    <div class="p-6 border-b border-slate-100 dark:border-slate-800">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white">Security</h3>
+                        <p class="text-sm text-slate-500">Manage your password and account protection.</p>
+                    </div>
+                    <div class="p-6 space-y-6">
+                        <button
+                            class="w-full flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800/50 rounded-lg hover:bg-slate-100 transition-colors">
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-primary">lock</span>
+                                <div class="text-left">
+                                    <p class="text-sm font-bold text-slate-900 dark:text-white">Change Password</p>
+                                    <p class="text-xs text-slate-500">Last changed 45 days ago</p>
+                                </div>
+                            </div>
+                            <span class="material-symbols-outlined text-slate-400">chevron_right</span>
+                        </button>
+                        <div
+                            class="flex items-center justify-between p-4 bg-primary/5 dark:bg-primary/10 rounded-lg border border-primary/10">
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-primary">verified_user</span>
+                                <div>
+                                    <p class="text-sm font-bold text-slate-900 dark:text-white">Two-Factor (2FA)</p>
+                                    <p class="text-xs text-slate-600 dark:text-slate-400">Currently Enabled</p>
+                                </div>
+                            </div>
+                            <button class="text-xs font-bold text-primary hover:underline">Manage</button>
+                        </div>
+                    </div>
+                </section>
+                <!-- Help & Support -->
+                <section class="bg-primary rounded-xl shadow-lg p-6 text-white">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="material-symbols-outlined text-primary-200">contact_support</span>
+                        <h3 class="font-bold">Need assistance?</h3>
+                    </div>
+                    <p class="text-sm text-primary-100 mb-6">Our dedicated enterprise support team is available 24/7 to
+                        help you with automation setups.</p>
+                    <button
+                        class="w-full py-3 bg-white text-primary rounded-lg font-bold text-sm hover:bg-slate-100 transition-all">Open
+                        Support Ticket</button>
+                </section>
+            </div>
+        </div>
+    </main>
+    <footer class="mt-12 py-8 border-t border-slate-200 dark:border-slate-800 text-center">
+        <p class="text-xs text-slate-500">Hand Gesture Automation System © 2025-26. All rights reserved.</p>
+    </footer>
+
+    <script src="dashboard_logic.js"></script>
+</body>
+
+</html>

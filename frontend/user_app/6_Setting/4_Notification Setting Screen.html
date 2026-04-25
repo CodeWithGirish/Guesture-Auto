@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Notifiction Settings</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1a227f",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#121320",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-size: 24px;
+            vertical-align: middle;
+        }
+
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px;
+            background: #e9e9f2;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            background: #1a227f;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        .active-tab {
+            background-color: #1a227f;
+            color: white;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+    <!-- Top Navbar -->
+    <header
+        class="sticky top-0 z-50 w-full bg-white dark:bg-background-dark border-b border-slate-200 dark:border-slate-800 px-6 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-8">
+            <div class="flex items-center gap-3">
+                <div class="bg-primary text-white p-1.5 rounded-lg flex items-center justify-center">
+                    <span class="material-symbols-outlined">front_hand</span>
+                </div>
+                <h2 class="text-primary font-bold text-xl tracking-tight">GestureAuto</h2>
+            </div>
+            <nav class="hidden md:flex items-center gap-9">
+                <a class="text-slate-600 hover:text-primary text-sm font-medium transition-colors"
+                    href="..\1_Dashboard and Profile\User Dashboard Screen.html">Dashboard</a>
+                <a class="text-primary text-sm font-bold border-b-2 border-primary pb-1" href="#">Settings</a>
+            </nav>
+        </div>
+        <div class="flex items-center gap-4">
+            <button class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors">
+                <span class="material-symbols-outlined">help_outline</span>
+            </button>
+            <button
+                class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors relative">
+                <span class="material-symbols-outlined">notifications</span>
+                <span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
+            </button>
+            <div class="h-8 w-[1px] bg-slate-200 dark:bg-slate-800 mx-2"></div>
+            <div class="flex items-center gap-3">
+                <div class="text-right hidden sm:block">
+                    <p class="text-sm font-semibold">Admin User</p>
+                    <p class="text-xs text-slate-500">System Control</p>
+                </div>
+                <div class="size-10 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden border border-slate-200 dark:border-slate-800"
+                    data-alt="User profile avatar circle"
+                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCaTTmulwEOfwbjOY8RsQG9WnHaV0r8HnD9UsCR88nQKfTOOI824ShrYNeHqvunJiH6a41tDxGcA6IdwNGs2YXxTdMaU6sk1PvV0A-TjIBT15MesmrN0qk-8PMa8LggK5XsQeY8PcnXA961k_zxEpxikF3Bz4uiQP14HKsivgbW4Cr8HTMwOxFrfPvZsAdaTJQ-u_kZ3SXsdAhO3n-Nr-wt1hoUxDRBzMu0TOzrtomCWd7k66p0f8PIPD4ec6d2_uh7qeirD6J4ymPQ');">
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="flex-1 flex flex-col lg:flex-row max-w-[1440px] mx-auto w-full p-6 gap-8">
+        <!-- Sidebar Navigation -->
+        <aside class="w-full lg:w-64 flex flex-col gap-6">
+            <div>
+                <h1 class="text-2xl font-black text-primary mb-1">Settings</h1>
+            </div>
+            <nav class="flex flex-col gap-1">
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                    href="1_Genral Setting Screen.html">
+                    <span class="material-symbols-outlined">settings</span>
+                    <span>General</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                    href="2_Camera Setting Screen.html">
+                    <span class="material-symbols-outlined">videocam</span>
+                    <span>Camera</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                    href="3_Detection Setting Screen.html">
+                    <span class="material-symbols-outlined">analytics</span>
+                    <span>Detection</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-primary bg-primary/10 font-medium" href="#">
+                    <span class="material-symbols-outlined">notifications</span>
+                    <span>Notifications</span>
+                </a>
+            </nav>
+        </aside>
+        <!-- Main Content Area -->
+        <section class="flex-1 flex flex-col gap-6">
+            <div>
+                <h1 class="text-3xl font-black text-primary leading-tight tracking-tight">Notification Preferences</h1>
+                <p class="text-primary/60 mt-1">Manage how and when you receive system alerts, summaries, and priority notifications across your enterprise network.</p>
+            </div>
+            <div class="grid grid-cols-1 gap-8 max-w-[1440px] mx-auto w-full">
+                <!-- General Notification Toggle Section -->
+                <section
+                    class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+                    <div
+                        class="px-6 py-4 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30">
+                        <h3 class="text-base font-bold text-slate-900 dark:text-white">Communication Channels</h3>
+                    </div>
+                    <div class="divide-y divide-slate-100 dark:divide-slate-800">
+                        <!-- System Alerts -->
+                        <div class="flex items-center justify-between p-6">
+                            <div class="flex-1 pr-4">
+                                <label class="text-sm font-bold text-slate-900 dark:text-white"
+                                    for="system-alerts">System Alerts</label>
+                                <p class="text-xs text-slate-500 mt-1">Receive critical system status and health
+                                    update notifications.</p>
+                            </div>
+                            <div
+                                class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+                                <input checked=""
+                                    class="peer appearance-none h-6 w-11 rounded-full bg-slate-300 dark:bg-slate-700 checked:bg-primary cursor-pointer transition-colors duration-200 border-none focus:ring-0 focus:ring-offset-0"
+                                    id="system-alerts" name="system-alerts" type="checkbox" />
+                                <span
+                                    class="absolute left-1 top-1 bg-white w-4 h-4 rounded-full pointer-events-none transition-transform duration-200 transform peer-checked:translate-x-5"></span>
+                            </div>
+                        </div>
+                        <!-- Sound Effects -->
+                        <div class="flex items-center justify-between p-6">
+                            <div class="flex-1 pr-4">
+                                <label class="text-sm font-bold text-slate-900 dark:text-white"
+                                    for="sound-effects">Sound Effects</label>
+                                <p class="text-xs text-slate-500 mt-1">Play distinct audio cues for different alert
+                                    types in the dashboard.</p>
+                            </div>
+                            <div
+                                class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+                                <input
+                                    class="peer appearance-none h-6 w-11 rounded-full bg-slate-300 dark:bg-slate-700 checked:bg-primary cursor-pointer transition-colors duration-200 border-none focus:ring-0 focus:ring-offset-0"
+                                    id="sound-effects" name="sound-effects" type="checkbox" />
+                                <span
+                                    class="absolute left-1 top-1 bg-white w-4 h-4 rounded-full pointer-events-none transition-transform duration-200 transform peer-checked:translate-x-5"></span>
+                            </div>
+                        </div>
+                        <!-- Desktop Notifications -->
+                        <div class="flex items-center justify-between p-6">
+                            <div class="flex-1 pr-4">
+                                <label class="text-sm font-bold text-slate-900 dark:text-white"
+                                    for="desktop-notifs">Desktop Notifications</label>
+                                <p class="text-xs text-slate-500 mt-1">Allow system popups on your operating system
+                                    while the browser is minimized.</p>
+                            </div>
+                            <div
+                                class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+                                <input checked=""
+                                    class="peer appearance-none h-6 w-11 rounded-full bg-slate-300 dark:bg-slate-700 checked:bg-primary cursor-pointer transition-colors duration-200 border-none focus:ring-0 focus:ring-offset-0"
+                                    id="desktop-notifs" name="desktop-notifs" type="checkbox" />
+                                <span
+                                    class="absolute left-1 top-1 bg-white w-4 h-4 rounded-full pointer-events-none transition-transform duration-200 transform peer-checked:translate-x-5"></span>
+                            </div>
+                        </div>
+                        <!-- Email Summaries -->
+                        <div class="flex items-center justify-between p-6">
+                            <div class="flex-1 pr-4">
+                                <div class="flex items-center gap-2">
+                                    <label class="text-sm font-bold text-slate-900 dark:text-white"
+                                        for="email-summaries">Email Summaries</label>
+                                    <span class="material-symbols-outlined text-slate-400 text-base cursor-help"
+                                        title="Daily digest of all security events">info</span>
+                                </div>
+                                <p class="text-xs text-slate-500 mt-1">Receive a periodic digest of activity and
+                                    security incidents.</p>
+                            </div>
+                            <div
+                                class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+                                <input checked=""
+                                    class="peer appearance-none h-6 w-11 rounded-full bg-slate-300 dark:bg-slate-700 checked:bg-primary cursor-pointer transition-colors duration-200 border-none focus:ring-0 focus:ring-offset-0"
+                                    id="email-summaries" name="email-summaries" type="checkbox" />
+                                <span
+                                    class="absolute left-1 top-1 bg-white w-4 h-4 rounded-full pointer-events-none transition-transform duration-200 transform peer-checked:translate-x-5"></span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Alert Priority Section -->
+                <section
+                    class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+                    <div
+                        class="px-6 py-4 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30">
+                        <h3 class="text-base font-bold text-slate-900 dark:text-white">Alert Priority Levels</h3>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-sm text-slate-600 dark:text-slate-400 mb-6 font-medium">Select levels to
+                            receive notifications for:</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <label
+                                class="flex items-center gap-4 p-4 border border-slate-100 dark:border-slate-800 rounded-lg cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                                <input
+                                    class="h-5 w-5 rounded border-slate-300 text-primary focus:ring-primary/20 transition-all"
+                                    type="checkbox" />
+                                <div class="flex flex-col">
+                                    <span class="text-sm font-bold text-slate-900 dark:text-white">Low
+                                        Priority</span>
+                                    <span class="text-xs text-slate-500">Non-essential maintenance events</span>
+                                </div>
+                            </label>
+                            <label
+                                class="flex items-center gap-4 p-4 border border-slate-100 dark:border-slate-800 rounded-lg cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                                <input checked=""
+                                    class="h-5 w-5 rounded border-slate-300 text-primary focus:ring-primary/20 transition-all"
+                                    type="checkbox" />
+                                <div class="flex flex-col">
+                                    <span class="text-sm font-bold text-slate-900 dark:text-white">Medium
+                                        Priority</span>
+                                    <span class="text-xs text-slate-500">Standard operational logs</span>
+                                </div>
+                            </label>
+                            <label
+                                class="flex items-center gap-4 p-4 border border-slate-100 dark:border-slate-800 rounded-lg cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                                <input checked=""
+                                    class="h-5 w-5 rounded border-slate-300 text-primary focus:ring-primary/20 transition-all"
+                                    type="checkbox" />
+                                <div class="flex flex-col">
+                                    <span class="text-sm font-bold text-slate-900 dark:text-white">High
+                                        Priority</span>
+                                    <span class="text-xs text-slate-500">Unusual network activity detected</span>
+                                </div>
+                            </label>
+                            <label
+                                class="flex items-center gap-4 p-4 border border-primary/20 bg-primary/5 rounded-lg cursor-pointer hover:bg-primary/10 transition-colors">
+                                <input checked=""
+                                    class="h-5 w-5 rounded border-primary text-primary focus:ring-primary/20 transition-all"
+                                    type="checkbox" />
+                                <div class="flex flex-col">
+                                    <span class="text-sm font-bold text-primary">Critical Priority</span>
+                                    <span class="text-xs text-primary/70">Immediate security breach alerts</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </section>
+                <!-- Save/Action Footer (Responsive) -->
+                <div
+                    class="flex flex-col sm:flex-row items-center justify-end gap-3 pt-4 border-t border-slate-200 dark:border-slate-800">
+                    <button
+                        class="w-full sm:w-auto px-6 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 font-bold text-sm hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">
+                        Reset to Defaults
+                    </button>
+                    <button
+                        class="w-full sm:w-auto px-10 py-2.5 rounded-lg bg-primary text-white font-bold text-sm hover:bg-primary/90 shadow-lg shadow-primary/20 transition-all">
+                        Save Changes
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

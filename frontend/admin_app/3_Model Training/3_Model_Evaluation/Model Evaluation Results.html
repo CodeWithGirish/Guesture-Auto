@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Model Evaluation Results</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1a227f",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#121320",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .progress-ring-circle {
+            transition: stroke-dashoffset 0.35s;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-[#0f101a] transition-colors duration-200">
+    <div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+        <div class="layout-container flex h-full grow flex-col">
+
+            <!-- Top Navigation Bar -->
+            <header
+                class="sticky top-0 z-50 bg-white dark:bg-background-dark border-b border-slate-200 dark:border-slate-800">
+                <div class="max-w-[1440px] mx-auto px-6 h-16 flex items-center justify-between">
+                    <div class="flex items-center gap-8">
+                        <div class="flex items-center gap-3 text-primary">
+                            <div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+                                <span class="material-symbols-outlined text-xl">layers</span>
+                            </div>
+                            <h1 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">GuestureAuto
+                            </h1>
+                        </div>
+                        <nav class="hidden md:flex items-center gap-6">
+                            <a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors"
+                                href="..\..\2_Image Augumentation\Dataset Overview Screen.html">Dataset Hub</a>
+                            <a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors border-b-2 border-primary pb-1 pt-1"
+                                href="#">Model Training</a>
+                            <a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors"
+                                href="..\..\5_deployment_&_version_control\Deploy Version Screen.html">Deployments</a>
+
+                        </nav>
+                    </div>
+                    <!-- Actions & Profile -->
+                    <div class="flex items-center gap-4">
+                        <div class="h-8 w-px bg-slate-200 dark:bg-slate-700"></div>
+                        <div class="flex items-center gap-3 ml-2 cursor-pointer group">
+                            <div class="size-9 rounded-full bg-slate-200 overflow-hidden border border-slate-200">
+                                <img alt="Profile" class="w-full h-full object-cover"
+                                    data-alt="Portrait of a professional ML researcher"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTt8V4eQVjA9lvtEpDuQDkLU10eshiSR3m167zH__Z9n_2MCcie4BjvKARyDFOl-a8rofCvSoYhL40vMoFt0FmxCXozXN2B7TjOu4044VOxIex560sfML5uOZ85-xu8k85rpTW5Sp-4OXlrsMnPd_vee6TkT-fBCJEWP-jlVIjnuIyZXyKFluKF3oNXzKFYiir4Xdk_l4L7MLHNVPA_YQYrN4IRRJGp9uiTvuaAyuhw-Iw_7vwux0WxOe6ttjn8HbJQZx0qxpsRMRM" />
+                            </div>
+                            <div class="hidden lg:block text-left leading-tight">
+                                <p
+                                    class="text-sm font-semibold text-slate-900 dark:text-white group-hover:text-primary transition-colors">
+                                    Dr. Aris Thorne</p>
+                                <p class="text-xs text-slate-500">Admin</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main class="flex-1 flex flex-col max-w-[1440px] mx-auto w-full px-6 py-6">
+                <!-- Page Header -->
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex flex-col gap-2">
+
+                        <div class="mb-4">
+                            <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Evaluation Summary</h2>
+                            <p class="text-[#555a91] text-base font-normal">Detailed performance analysis for Model
+                                MOD-88291.</p>
+                        </div>
+
+                    </div>
+                    <div class="flex gap-3">
+                        <button
+                            class="flex items-center justify-center rounded-lg h-11 border-2 border-primary text-primary hover:bg-primary/5 gap-2 text-sm font-bold px-5 transition-all">
+                            <span class="material-symbols-outlined text-[20px]">download</span>
+                            Export Model
+                        </button>
+                        <button
+                            class="flex items-center justify-center rounded-lg h-11 bg-primary text-white hover:bg-primary/90 gap-2 text-sm font-bold px-6 shadow-lg shadow-primary/20 transition-all">
+                            <span class="material-symbols-outlined text-[20px]">description</span>
+                            Generate Full Report
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tabs -->
+                <div class="border-b border-[#d2d4e5] mb-8">
+                    <div class="flex gap-10">
+                        <a class="flex flex-col items-center justify-center border-b-[3px] border-transparent text-[#555a91] pb-4 pt-2 hover:text-primary transition-all"
+                            href="..\1_Model_Configration\Model Configration Screen.html">
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-[20px]">tune</span>
+                                <p class="text-sm font-bold tracking-[0.015em]">Training Configuration</p>
+                            </div>
+                        </a>
+                        <a class="flex flex-col items-center justify-center border-b-[3px] border-transparent text-[#555a91] pb-4 pt-2 hover:text-primary transition-all"
+                            href="..\2_Model_Training\Model Training Screen.html">
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-[20px]">monitoring</span>
+                                <p class="text-sm font-bold tracking-[0.015em]">Live Training</p>
+                            </div>
+                        </a>
+                        <a class="flex flex-col items-center justify-center border-b-[3px] border-primary text-primary pb-4 pt-2 group"
+                            href="#">
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-[20px]">analytics</span>
+                                <p class="text-sm font-bold tracking-[0.015em]">Evaluation Results</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- KPI Metric Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <!-- Precision -->
+                    <div
+                        class="bg-white rounded-xl p-6 border border-primary/10 shadow-sm flex items-center justify-between">
+                        <div>
+                            <p class="text-slate-500 text-sm font-semibold uppercase tracking-wider">Precision</p>
+                            <p class="text-3xl font-black text-primary mt-1">94.2%</p>
+                            <div class="flex items-center gap-1 mt-2 text-emerald-600 font-bold text-sm">
+                                <span class="material-symbols-outlined text-sm">trending_up</span>
+                                <span>+1.2%</span>
+                            </div>
+                        </div>
+                        <div class="relative size-20">
+                            <svg class="size-full" viewbox="0 0 36 36">
+                                <circle class="stroke-slate-100" cx="18" cy="18" fill="none" r="16" stroke-width="4">
+                                </circle>
+                                <circle class="stroke-primary" cx="18" cy="18" fill="none" r="16"
+                                    stroke-dasharray="94, 100" stroke-linecap="round" stroke-width="4"></circle>
+                            </svg>
+                        </div>
+                    </div>
+                    <!-- Recall -->
+                    <div
+                        class="bg-white rounded-xl p-6 border border-primary/10 shadow-sm flex items-center justify-between">
+                        <div>
+                            <p class="text-slate-500 text-sm font-semibold uppercase tracking-wider">Recall</p>
+                            <p class="text-3xl font-black text-primary mt-1">91.5%</p>
+                            <div class="flex items-center gap-1 mt-2 text-rose-500 font-bold text-sm">
+                                <span class="material-symbols-outlined text-sm">trending_down</span>
+                                <span>-0.5%</span>
+                            </div>
+                        </div>
+                        <div class="relative size-20">
+                            <svg class="size-full" viewbox="0 0 36 36">
+                                <circle class="stroke-slate-100" cx="18" cy="18" fill="none" r="16" stroke-width="4">
+                                </circle>
+                                <circle class="stroke-primary" cx="18" cy="18" fill="none" r="16"
+                                    stroke-dasharray="91, 100" stroke-linecap="round" stroke-width="4"></circle>
+                            </svg>
+                        </div>
+                    </div>
+                    <!-- F1 Score -->
+                    <div
+                        class="bg-white rounded-xl p-6 border border-primary/10 shadow-sm flex items-center justify-between">
+                        <div>
+                            <p class="text-slate-500 text-sm font-semibold uppercase tracking-wider">F1 Score</p>
+                            <p class="text-3xl font-black text-primary mt-1">92.8%</p>
+                            <div class="flex items-center gap-1 mt-2 text-emerald-600 font-bold text-sm">
+                                <span class="material-symbols-outlined text-sm">trending_up</span>
+                                <span>+0.8%</span>
+                            </div>
+                        </div>
+                        <div class="relative size-20">
+                            <svg class="size-full" viewbox="0 0 36 36">
+                                <circle class="stroke-slate-100" cx="18" cy="18" fill="none" r="16" stroke-width="4">
+                                </circle>
+                                <circle class="stroke-primary" cx="18" cy="18" fill="none" r="16"
+                                    stroke-dasharray="92, 100" stroke-linecap="round" stroke-width="4"></circle>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <!-- Detailed Analysis Section -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                    <!-- Confusion Matrix -->
+                    <div class="bg-white rounded-xl p-6 border border-primary/10 shadow-sm">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-lg font-bold text-primary">Confusion Matrix</h3>
+                            <div class="flex items-center gap-2">
+                                <span class="size-3 bg-primary rounded-full"></span>
+                                <span class="text-xs font-medium text-slate-500">Predicted Values</span>
+                            </div>
+                        </div>
+                        <div class="relative grid grid-cols-5 gap-2 p-2">
+                            <!-- Header Labels -->
+                            <div class="col-span-1"></div>
+                            <div class="text-center text-[10px] font-bold text-slate-400 uppercase">Class A</div>
+                            <div class="text-center text-[10px] font-bold text-slate-400 uppercase">Class B</div>
+                            <div class="text-center text-[10px] font-bold text-slate-400 uppercase">Class C</div>
+                            <div class="text-center text-[10px] font-bold text-slate-400 uppercase">Class D</div>
+                            <!-- Row 1 -->
+                            <div class="flex items-center text-[10px] font-bold text-slate-400 uppercase">Class A</div>
+                            <div
+                                class="aspect-square flex items-center justify-center bg-primary rounded text-white text-sm font-bold">
+                                428</div>
+                            <div
+                                class="aspect-square flex items-center justify-center bg-primary/20 rounded text-primary text-sm font-bold">
+                                12</div>
+                            <div
+                                class="aspect-square flex items-center justify-center bg-primary/10 rounded text-primary text-sm font-bold">
+                                4</div>
+                            <div
+                                class="aspect-square flex items-center justify-center bg-primary/10 rounded text-primary text-sm font-bold">
+                                1</div>
+                            <!-- Row 2 -->
+                            <div class="flex items-center text-[10px] font-bold text-slate-400 uppercase">Class B</div>
+                            <div
+                                class="aspect-square flex items-center justify-center bg-primary/20 rounded text-primary text-sm font-bold">
+                                15</div>
+                            <div
+                                class="aspect-square flex items-center justify-center bg-primary/80 rounded text-white text-sm font-bold">
+                                392</div>
+                            <div
+                                class="aspect-square flex items-center justify-center bg-primary/20 rounded text-primary text-sm font-bold">
+                                22</div>
+                            <div
+                                class="aspect-square flex items-center justify-center bg-primary/10 rounded text-primary text-sm font-bold">
+                                8</div>
+                            <!-- Row 3 -->
+                            <div class="flex items-center text-[10px] font-bold text-slate-400 uppercase">Class C</div>
+                            <div
+                                class="aspect-square flex items-center justify-center bg-primary/10 rounded text-primary text-sm font-bold">
+                                2</div>
+                            <div
+                                class="aspect-square flex items-center justify-center bg-primary/20 rounded text-primary text-sm font-bold">
+                                18</div>
+                            <div
+                                class="aspect-square flex items-center justify-center bg-primary/90 rounded text-white text-sm font-bold">
+                                415</div>
+                            <div
+                                class="aspect-square flex items-center justify-center bg-primary/20 rounded text-primary text-sm font-bold">
+                                14</div>
+                            <!-- Row 4 -->
+                            <div class="flex items-center text-[10px] font-bold text-slate-400 uppercase">Class D</div>
+                            <div
+                                class="aspect-square flex items-center justify-center bg-primary/10 rounded text-primary text-sm font-bold">
+                                5</div>
+                            <div
+                                class="aspect-square flex items-center justify-center bg-primary/10 rounded text-primary text-sm font-bold">
+                                6</div>
+                            <div
+                                class="aspect-square flex items-center justify-center bg-primary/20 rounded text-primary text-sm font-bold">
+                                11</div>
+                            <div
+                                class="aspect-square flex items-center justify-center bg-primary rounded text-white text-sm font-bold">
+                                432</div>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                            <p class="text-xs text-slate-400 italic">Values represent sample count in validation set
+                                (n=1,795)</p>
+                            <div class="flex items-center gap-1">
+                                <span class="text-xs font-bold text-slate-500">93.5% Accuracy Overall</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Performance Chart -->
+                    <div class="bg-white rounded-xl p-6 border border-primary/10 shadow-sm">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-lg font-bold text-primary">Accuracy vs. Epochs</h3>
+                            <div class="flex gap-4">
+                                <div class="flex items-center gap-2">
+                                    <span class="size-3 bg-primary rounded-full"></span>
+                                    <span class="text-xs font-medium text-slate-500">Training</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="size-3 bg-primary/30 rounded-full"></span>
+                                    <span class="text-xs font-medium text-slate-500">Validation</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative h-[240px] w-full mt-4">
+                            <svg class="h-full w-full" preserveaspectratio="none" viewbox="0 0 500 200">
+                                <!-- Grid Lines -->
+                                <line stroke="#f1f5f9" stroke-width="1" x1="0" x2="500" y1="40" y2="40"></line>
+                                <line stroke="#f1f5f9" stroke-width="1" x1="0" x2="500" y1="80" y2="80"></line>
+                                <line stroke="#f1f5f9" stroke-width="1" x1="0" x2="500" y1="120" y2="120"></line>
+                                <line stroke="#f1f5f9" stroke-width="1" x1="0" x2="500" y1="160" y2="160"></line>
+                                <!-- Validation Line (Lighter) -->
+                                <path d="M0 180 Q 50 160, 100 140 T 200 110 T 300 85 T 400 75 T 500 70" fill="none"
+                                    stroke="#1a227f" stroke-opacity="0.2" stroke-width="2"></path>
+                                <!-- Training Line (Primary) -->
+                                <path d="M0 190 Q 50 150, 100 110 T 200 70 T 300 45 T 400 30 T 500 25" fill="none"
+                                    stroke="#1a227f" stroke-linecap="round" stroke-width="3"></path>
+                            </svg>
+                            <div
+                                class="flex justify-between mt-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest px-1">
+                                <span>0</span>
+                                <span>10</span>
+                                <span>20</span>
+                                <span>30</span>
+                                <span>40</span>
+                                <span>50 Epochs</span>
+                            </div>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-slate-100 grid grid-cols-2 gap-4">
+                            <div class="text-center">
+                                <p class="text-[10px] text-slate-400 uppercase font-bold">Final Training Acc</p>
+                                <p class="text-lg font-bold text-primary">0.982</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-[10px] text-slate-400 uppercase font-bold">Final Validation Acc</p>
+                                <p class="text-lg font-bold text-primary">0.941</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Meta Information Bar -->
+                <div
+                    class="bg-primary/5 rounded-xl border border-primary/10 p-5 flex flex-wrap justify-between items-center gap-6">
+                    <div class="flex items-center gap-6">
+                        <div class="flex flex-col">
+                            <span class="text-[10px] text-slate-500 uppercase font-bold tracking-wider">Model ID</span>
+                            <span class="text-sm font-semibold text-primary">MOD-88291-BETA</span>
+                        </div>
+                        <div class="h-8 w-px bg-primary/10"></div>
+                        <div class="flex flex-col">
+                            <span class="text-[10px] text-slate-500 uppercase font-bold tracking-wider">Training
+                                Duration</span>
+                            <span class="text-sm font-semibold text-primary">04h 22m 15s</span>
+                        </div>
+                        <div class="h-8 w-px bg-primary/10"></div>
+                        <div class="flex flex-col">
+                            <span class="text-[10px] text-slate-500 uppercase font-bold tracking-wider">Dataset
+                                Version</span>
+                            <span class="text-sm font-semibold text-primary">v2.4.0-final</span>
+                        </div>
+                        <div class="h-8 w-px bg-primary/10"></div>
+                        <div class="flex flex-col">
+                            <span class="text-[10px] text-slate-500 uppercase font-bold tracking-wider">Hardware
+                                used</span>
+                            <span class="text-sm font-semibold text-primary">NVIDIA A100 (40GB)</span>
+                        </div>
+                    </div>
+                    <div
+                        class="flex items-center gap-2 px-3 py-1.5 bg-emerald-100 text-emerald-700 rounded-lg text-xs font-black uppercase">
+                        <span class="material-symbols-outlined text-[16px]">check_circle</span>
+                        Evaluation Complete
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+
+</html>

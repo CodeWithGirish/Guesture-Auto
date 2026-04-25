@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Detectiomn Setting
+    </title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1a227f",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#121320",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-size: 24px;
+            vertical-align: middle;
+        }
+
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px;
+            background: #e9e9f2;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            background: #1a227f;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        .active-tab {
+            background-color: #1a227f;
+            color: white;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+    <!-- Top Navbar -->
+    <header
+        class="sticky top-0 z-50 w-full bg-white dark:bg-background-dark border-b border-slate-200 dark:border-slate-800 px-6 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-8">
+            <div class="flex items-center gap-3">
+                <div class="bg-primary text-white p-1.5 rounded-lg flex items-center justify-center">
+                    <span class="material-symbols-outlined">front_hand</span>
+                </div>
+                <h2 class="text-primary font-bold text-xl tracking-tight">GestureAuto</h2>
+            </div>
+            <nav class="hidden md:flex items-center gap-9">
+                <a class="text-slate-600 hover:text-primary text-sm font-medium transition-colors"
+                    href="..\1_Dashboard and Profile\User Dashboard Screen.html">Dashboard</a>
+                <a class="text-primary text-sm font-bold border-b-2 border-primary pb-1" href="#">Settings</a>
+            </nav>
+        </div>
+        <div class="flex items-center gap-4">
+            <button class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors">
+                <span class="material-symbols-outlined">help_outline</span>
+            </button>
+            <button
+                class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors relative">
+                <span class="material-symbols-outlined">notifications</span>
+                <span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
+            </button>
+            <div class="h-8 w-[1px] bg-slate-200 dark:bg-slate-800 mx-2"></div>
+            <div class="flex items-center gap-3">
+                <div class="text-right hidden sm:block">
+                    <p class="text-sm font-semibold">Admin User</p>
+                    <p class="text-xs text-slate-500">System Control</p>
+                </div>
+                <div class="size-10 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden border border-slate-200 dark:border-slate-800"
+                    data-alt="User profile avatar circle"
+                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCaTTmulwEOfwbjOY8RsQG9WnHaV0r8HnD9UsCR88nQKfTOOI824ShrYNeHqvunJiH6a41tDxGcA6IdwNGs2YXxTdMaU6sk1PvV0A-TjIBT15MesmrN0qk-8PMa8LggK5XsQeY8PcnXA961k_zxEpxikF3Bz4uiQP14HKsivgbW4Cr8HTMwOxFrfPvZsAdaTJQ-u_kZ3SXsdAhO3n-Nr-wt1hoUxDRBzMu0TOzrtomCWd7k66p0f8PIPD4ec6d2_uh7qeirD6J4ymPQ');">
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="flex-1 flex flex-col lg:flex-row max-w-[1440px] mx-auto w-full p-6 gap-8">
+        <!-- Sidebar Navigation -->
+        <aside class="w-full lg:w-64 flex flex-col gap-6">
+            <div>
+                <h1 class="text-2xl font-black text-primary mb-1">Settings</h1>
+            </div>
+            <nav class="flex flex-col gap-1">
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                    href="1_Genral Setting Screen.html">
+                    <span class="material-symbols-outlined">settings</span>
+                    <span>General</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                    href="2_Camera Setting Screen.html">
+                    <span class="material-symbols-outlined">videocam</span>
+                    <span>Camera</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-primary bg-primary/10 font-medium" href="#">
+                    <span class="material-symbols-outlined">analytics</span>
+                    <span>Detection</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                    href="4_Notification Setting Screen.html">
+                    <span class="material-symbols-outlined">notifications</span>
+                    <span>Notifications</span>
+                </a>
+            </nav>
+        </aside>
+        <!-- Main Content Area -->
+        <section class="flex-1 flex flex-col gap-6">
+            <!-- Header -->
+            <div>
+                <h1 class="text-3xl font-black text-primary leading-tight tracking-tight">Detection
+                    Configuration</h1>
+                <p class="text-primary/60 mt-1">Configure sensitivity and processing parameters for
+                    high-precision environmental analysis</p>
+            </div>
+            <!-- Settings Sections -->
+            <div class="space-y-8">
+                <!-- Section: Sensitivity & Thresholds -->
+                <section
+                    class="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
+                    <div class="p-6 border-b border-slate-100 dark:border-slate-800 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary">tune</span>
+                        <h2 class="text-lg font-bold text-slate-900 dark:text-white">Sensitivity &amp;
+                            Thresholds</h2>
+                    </div>
+                    <div class="p-8 space-y-10">
+                        <!-- Master Sensitivity -->
+                        <div class="grid md:grid-cols-3 gap-8 items-start">
+                            <div class="col-span-1">
+                                <label class="block font-semibold text-slate-800 dark:text-slate-200 mb-1">Master
+                                    Sensitivity</label>
+                                <p class="text-sm text-slate-500">Global response rate for all active detection
+                                    modules.</p>
+                            </div>
+                            <div class="col-span-2 flex items-center gap-6">
+                                <input class="flex-1 h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer"
+                                    max="100" min="0" type="range" value="75" />
+                                <div class="w-16">
+                                    <input
+                                        class="w-full text-center py-1 border border-slate-200 rounded text-sm font-semibold bg-slate-50"
+                                        type="text" value="75%" />
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Confidence Threshold -->
+                        <div class="grid md:grid-cols-3 gap-8 items-start">
+                            <div class="col-span-1">
+                                <label class="block font-semibold text-slate-800 dark:text-slate-200 mb-1">Confidence
+                                    Threshold</label>
+                                <p class="text-sm text-slate-500">Minimum probability required to trigger a
+                                    detection event.</p>
+                            </div>
+                            <div class="col-span-2 flex items-center gap-6">
+                                <input class="flex-1 h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer"
+                                    max="100" min="0" type="range" value="88" />
+                                <div class="w-16">
+                                    <input
+                                        class="w-full text-center py-1 border border-slate-200 rounded text-sm font-semibold bg-slate-50"
+                                        type="text" value="88%" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Section: Advanced Processing -->
+                <section
+                    class="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
+                    <div class="p-6 border-b border-slate-100 dark:border-slate-800 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary">analytics</span>
+                        <h2 class="text-lg font-bold text-slate-900 dark:text-white">Gesture Smoothing</h2>
+                    </div>
+                    <div class="p-8 space-y-10">
+                        <!-- Algorithm Choice -->
+                        <div class="grid md:grid-cols-3 gap-8 items-center">
+                            <div class="col-span-1">
+                                <label class="block font-semibold text-slate-800 dark:text-slate-200 mb-1">Smoothing
+                                    Algorithm</label>
+                                <p class="text-sm text-slate-500">The mathematical model used to reduce input
+                                    noise.</p>
+                            </div>
+                            <div class="col-span-2">
+                                <select
+                                    class="w-full max-w-xs rounded-lg border-slate-300 py-2.5 text-sm focus:ring-primary focus:border-primary">
+                                    <option>Exponential Moving Average</option>
+                                    <option selected="">Kalman Filtering</option>
+                                    <option>Linear Interpolation</option>
+                                    <option>Gaussian Blur Smoothing</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Smoothing Factor -->
+                        <div class="grid md:grid-cols-3 gap-8 items-start">
+                            <div class="col-span-1">
+                                <label class="block font-semibold text-slate-800 dark:text-slate-200 mb-1">Smoothing
+                                    Factor</label>
+                                <p class="text-sm text-slate-500">Higher values reduce jitter but increase
+                                    visual latency.</p>
+                            </div>
+                            <div class="col-span-2 flex items-center gap-6">
+                                <input class="flex-1 h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer"
+                                    max="1.0" min="0" step="0.05" type="range" value="0.45" />
+                                <div class="w-16">
+                                    <input
+                                        class="w-full text-center py-1 border border-slate-200 rounded text-sm font-semibold bg-slate-50"
+                                        type="text" value="0.45" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Section: Mode Toggle -->
+
+                <!-- Action Footer -->
+                <div
+                    class="flex items-center justify-end gap-4 pt-6 border-t border-slate-200 dark:border-slate-800 pb-12">
+                    <button
+                        class="px-6 py-2.5 rounded-lg border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-semibold text-sm hover:bg-slate-50 transition-colors">
+                        Reset to Defaults
+                    </button>
+                    <button
+                        class="px-8 py-2.5 rounded-lg bg-primary text-white font-bold text-sm shadow-lg shadow-primary/20 hover:brightness-110 active:scale-95 transition-all">
+                        Save Changes
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

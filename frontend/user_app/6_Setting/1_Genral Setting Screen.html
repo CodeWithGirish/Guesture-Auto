@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Genral Settings</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1a227f",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#121320",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-size: 24px;
+            vertical-align: middle;
+        }
+
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px;
+            background: #e9e9f2;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            background: #1a227f;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+    <!-- Top Navbar -->
+    <header
+        class="sticky top-0 z-50 w-full bg-white dark:bg-background-dark border-b border-slate-200 dark:border-slate-800 px-6 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-8">
+            <div class="flex items-center gap-3">
+                <div class="bg-primary text-white p-1.5 rounded-lg flex items-center justify-center">
+                    <span class="material-symbols-outlined">front_hand</span>
+                </div>
+                <h2 class="text-primary font-bold text-xl tracking-tight">GestureAuto</h2>
+            </div>
+            <nav class="hidden md:flex items-center gap-9">
+                <a class="text-slate-600 hover:text-primary text-sm font-medium transition-colors"
+                    href="..\1_Dashboard and Profile\User Dashboard Screen.html">Dashboard</a>
+                <a class="text-primary text-sm font-bold border-b-2 border-primary pb-1" href="#">Settings</a>
+            </nav>
+        </div>
+        <div class="flex items-center gap-4">
+            <button class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors">
+                <span class="material-symbols-outlined">help_outline</span>
+            </button>
+            <button
+                class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors relative">
+                <span class="material-symbols-outlined">notifications</span>
+                <span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
+            </button>
+            <div class="h-8 w-[1px] bg-slate-200 dark:bg-slate-800 mx-2"></div>
+            <div class="flex items-center gap-3">
+                <div class="text-right hidden sm:block">
+                    <p class="text-sm font-semibold">Admin User</p>
+                    <p class="text-xs text-slate-500">System Control</p>
+                </div>
+                <div class="size-10 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden border border-slate-200 dark:border-slate-800"
+                    data-alt="User profile avatar circle"
+                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCaTTmulwEOfwbjOY8RsQG9WnHaV0r8HnD9UsCR88nQKfTOOI824ShrYNeHqvunJiH6a41tDxGcA6IdwNGs2YXxTdMaU6sk1PvV0A-TjIBT15MesmrN0qk-8PMa8LggK5XsQeY8PcnXA961k_zxEpxikF3Bz4uiQP14HKsivgbW4Cr8HTMwOxFrfPvZsAdaTJQ-u_kZ3SXsdAhO3n-Nr-wt1hoUxDRBzMu0TOzrtomCWd7k66p0f8PIPD4ec6d2_uh7qeirD6J4ymPQ');">
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="flex-1 flex flex-col lg:flex-row max-w-[1440px] mx-auto w-full p-6 gap-8">
+        <!-- Sidebar Navigation -->
+        <aside class="w-full lg:w-64 flex flex-col gap-6">
+            <div>
+                <h1 class="text-2xl font-black text-primary mb-1">Settings</h1>
+            </div>
+            <nav class="flex flex-col gap-1">
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-primary bg-primary/10 font-medium" href="#">
+                    <span class="material-symbols-outlined">settings</span>
+                    <span>General</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                    href="..\6_Setting\2_Camera Setting Screen.html">
+                    <span class="material-symbols-outlined">videocam</span>
+                    <span>Camera</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                    href="..\6_Setting\3_Detection Setting Screen.html">
+                    <span class="material-symbols-outlined">analytics</span>
+                    <span>Detection</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                    href="..\6_Setting\4_Notification Setting Screen.html">
+                    <span class="material-symbols-outlined">notifications</span>
+                    <span>Notifications</span>
+                </a>
+            </nav>
+        </aside>
+        <!-- Main Content Area -->
+        <section class="flex-1 flex flex-col gap-6">
+            <!-- Header Section -->
+            <div>
+                <h1 class="text-3xl font-black text-primary leading-tight tracking-tight">Genral Settings</h1>
+                <p class="text-primary/60 mt-1">Configure hardware sources and manage real-time image
+                    optimization.</p>
+            </div>
+            <!-- Section: Detection Sensitivity (Example of Detection Tab content) -->
+            <div
+                class="bg-white dark:bg-background-dark border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden">
+                <div
+                    class="px-6 py-4 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/30">
+                    <h3 class="font-bold text-slate-800 dark:text-slate-100">Detection &amp; Sensitivity</h3>
+                    <span class="text-xs font-bold px-2 py-1 bg-primary/10 text-primary rounded">ADVANCED</span>
+                </div>
+                <div class="p-6 flex flex-col gap-8">
+                    <!-- Sensitivity Slider -->
+                    <div class="flex flex-col gap-4">
+                        <div class="flex justify-between items-end">
+                            <div>
+                                <label class="text-sm font-semibold flex items-center gap-2">
+                                    Confidence Threshold
+                                    <span
+                                        class="material-symbols-outlined text-sm text-slate-400 cursor-help">info</span>
+                                </label>
+                                <p class="text-xs text-slate-500">Minimum probability required to trigger a gesture
+                                    action</p>
+                            </div>
+                            <span class="text-lg font-bold text-primary">85%</span>
+                        </div>
+                        <input class="slider" max="100" min="0" type="range" value="85" />
+                    </div>
+                    <!-- Smoothing Slider -->
+                    <div class="flex flex-col gap-4">
+                        <div class="flex justify-between items-end">
+                            <div>
+                                <label class="text-sm font-semibold">Motion Smoothing</label>
+                                <p class="text-xs text-slate-500">Reduces cursor jittering for hand-held gestures</p>
+                            </div>
+                            <span class="text-lg font-bold text-primary">Low</span>
+                        </div>
+                        <input class="slider" max="2" min="0" step="0.5" type="range" value="0.5" />
+                    </div>
+                    <div class="h-[1px] bg-slate-100 dark:bg-slate-800"></div>
+                    <!-- Boolean Toggles -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800/50 rounded-lg">
+                            <div>
+                                <p class="text-sm font-semibold">Multi-Hand Support</p>
+                                <p class="text-xs text-slate-500">Detect up to 2 hands simultaneously</p>
+                            </div>
+                            <label
+                                class="relative flex h-[28px] w-[48px] cursor-pointer items-center rounded-full border-none bg-slate-300 dark:bg-slate-700 p-0.5 has-[:checked]:justify-end has-[:checked]:bg-primary transition-all">
+                                <div class="h-[24px] w-[24px] rounded-full bg-white shadow-sm"></div>
+                                <input checked="" class="invisible absolute" type="checkbox" />
+                            </label>
+                        </div>
+                        <div class="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800/50 rounded-lg">
+                            <div>
+                                <p class="text-sm font-semibold">Z-Axis Depth Tracking</p>
+                                <p class="text-xs text-slate-500">Enable 3D gesture volume detection</p>
+                            </div>
+                            <label
+                                class="relative flex h-[28px] w-[48px] cursor-pointer items-center rounded-full border-none bg-slate-300 dark:bg-slate-700 p-0.5 has-[:checked]:justify-end has-[:checked]:bg-primary transition-all">
+                                <div class="h-[24px] w-[24px] rounded-full bg-white shadow-sm"></div>
+                                <input class="invisible absolute" type="checkbox" />
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Floating Action Bar -->
+            <div
+                class="sticky bottom-6 mt-4 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border border-slate-200 dark:border-slate-800 p-4 rounded-xl shadow-lg flex items-center justify-between">
+                <p class="text-sm text-slate-500 hidden sm:block">You have unsaved changes in 'Detection'</p>
+                <div class="flex gap-3 w-full sm:w-auto">
+                    <button
+                        class="flex-1 sm:flex-none px-6 py-2.5 text-slate-600 dark:text-slate-300 font-bold text-sm hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors">
+                        Reset to Defaults
+                    </button>
+                    <button
+                        class="flex-1 sm:flex-none px-8 py-2.5 bg-primary text-white font-bold text-sm rounded-lg hover:bg-primary/90 shadow-md shadow-primary/20 transition-all">
+                        Save Changes
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,8 @@
+{
+    "rotation": "72",
+    "gaussian_blur": "2.9",
+    "noise_intensity": "28",
+    "brightness": "1.2",
+    "contrast": "1.4",
+    "random_flip": true
+}

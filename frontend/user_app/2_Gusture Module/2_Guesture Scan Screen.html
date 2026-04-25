@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Hand Gesture Automation - Gesture Module</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1a227f",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#121320",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .confidence-gradient {
+            background: linear-gradient(90deg, #1a227f 0%, #4f46e5 100%);
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+        }
+
+        /* Add inside your <style> tag */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #334155;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+    <!-- Top Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center h-16 gap-8">
+                <!-- Logo Section -->
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white">
+                        <span class="material-symbols-outlined">gesture</span>
+                    </div>
+                    <span class="text-xl font-bold text-primary dark:text-white tracking-tight">GestureAuto</span>
+                </div>
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex space-x-8">
+                    <a class="text-slate-500 hover:text-primary dark:hover:text-white px-1 py-2 text-sm font-medium transition-colors"
+                        href="..\1_Dashboard and Profile\User Dashboard Screen.html">Dashboard</a>
+                    <a class="text-slate-500 hover:text-primary dark:hover:text-white px-1 py-2 text-sm font-medium transition-colors"
+                        href="javascript:void(0)" onclick="safeNavigate('1_Saved Guesture Screen.html')">
+                        My Gestures
+                    </a>
+
+                    <a class="text-primary dark:text-white border-b-2 border-primary px-1 py-2 text-sm font-semibold"
+                        href="#">Sample Scan</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <!-- Sub-navigation / Breadcrumbs -->
+    <div class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+        <div
+            class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+                <h1 class="text-2xl font-bold text-slate-900 dark:text-white">Scan New Gestures</h1>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Show Your Guesture in Camera to Scan</p>
+            </div>
+        </div>
+    </div>
+    <!-- Main Content Area -->
+    <main class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-32"">
+        <div class=" grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <!-- Left: Live Camera Preview (8 columns) -->
+        <div class="lg:col-span-8 space-y-4">
+            <div
+                class="relative bg-slate-900 rounded-xl overflow-hidden aspect-video shadow-2xl border-4 border-white dark:border-slate-800 group flex items-center justify-center">
+                <img id="live-feed" alt="Live Feed" class="w-full h-full object-cover" src="" />
+
+                <div id="camera-placeholder"
+                    class="absolute inset-0 flex flex-col items-center justify-center text-slate-500">
+                    <span class="material-symbols-outlined text-6xl mb-2">videocam_off</span>
+                    <p class="font-bold">Camera Offline</p>
+                </div>
+
+                <div class="absolute top-4 left-4 flex gap-2">
+                    <div
+                        class="flex items-center gap-2 bg-black/60 backdrop-blur-md text-white text-[10px] font-bold px-3 py-1.5 rounded-full border border-white/20">
+                        <span id="recording-dot" class="size-2 bg-red-500 rounded-full hidden animate-ping"></span>
+                        <span id="camera-status">OFFLINE</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Bottom Action Bar -->
+            <div
+                class="bg-white dark:bg-slate-900 rounded-xl p-4 shadow-sm border border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                    <button onclick="startScanning()"
+                        class="flex items-center gap-2 bg-primary text-white px-8 py-3 rounded-lg font-bold hover:bg-primary/90 transition-all shadow-lg shadow-primary/20">
+                        <span class="material-symbols-outlined">play_arrow</span>
+                        Scan
+                    </button>
+                    <button onclick="stopScanning()"
+                        class="flex items-center gap-2 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 px-6 py-3 rounded-lg font-bold hover:bg-slate-50 transition-all">
+                        <span class="material-symbols-outlined">stop</span>
+                        Stop
+                    </button>
+                    <button onclick="captureGestureImage()"
+                        class="flex items-center gap-2 bg-emerald-500 text-white px-6 py-3 rounded-lg font-bold hover:bg-emerald-600 transition-all shadow-lg shadow-emerald-500/20">
+                        <span class="material-symbols-outlined">photo_camera</span>
+                        Capture
+                    </button>
+                </div>
+                <button onclick="resetSession()"
+                    class="flex items-center gap-2 text-slate-500 hover:text-red-600 transition-all font-semibold">
+                    <span class="material-symbols-outlined">refresh</span>
+                    Reset Session
+                </button>
+            </div>
+        </div>
+        <!-- Right: Analytics Panel (4 columns) -->
+        <div class="lg:col-span-4 flex flex-col gap-6">
+            <!-- Scan Mode Switcher -->
+            <div class="bg-white dark:bg-slate-900 rounded-xl p-2 shadow-sm border border-slate-200 dark:border-slate-800 flex gap-2">
+                <button id="mode-static" onclick="setScanMode('static')" class="flex-1 py-2 text-xs font-bold bg-slate-900 dark:bg-slate-700 text-white rounded-lg transition-all shadow-md">Static Scan (Pose)</button>
+                <button id="mode-sequence" onclick="setScanMode('sequence')" class="flex-1 py-2 text-xs font-bold bg-transparent text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all">Sequence (Motion)</button>
+            </div>
+            
+            <!-- Status Card -->
+            <div class="bg-primary text-white rounded-xl p-6 shadow-xl relative overflow-hidden">
+                <div class="relative z-10">
+                    <p class="text-[10px] uppercase tracking-[0.2em] font-bold opacity-70 mb-1">Detected Gesture</p>
+                    <h2 class="text-4xl font-black mb-4 flex items-baseline gap-2">
+                        <input type="text" id="gesture-name-input" placeholder="Enter Gesture Name First"
+                            class="bg-white/10 backdrop-blur-md border border-white/20 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/40 text-2xl placeholder:text-base w-full placeholder-white/40 px-4 py-2 rounded-xl shadow-lg outline-none transition-all duration-300 hover:bg-white/20 focus:scale-[1.02]" />
+                        <span id="gesture-indicator" class="size-2 bg-emerald-400 rounded-full hidden"></span>
+                    </h2>
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-end">
+                            <p class="text-[10px] uppercase font-bold opacity-70">Confidence</p>
+                            <p id="gesture-confidence" class="text-2xl font-mono font-bold">0%</p>
+                        </div>
+                        <div class="w-full bg-white/20 h-3 rounded-full overflow-hidden">
+                            <div id="confidence-bar" class="bg-white h-full rounded-full transition-all duration-300"
+                                style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute -bottom-4 -right-4 size-32 bg-white/10 rounded-full blur-3xl"></div>
+            </div>
+            <!-- Landmarks Visualization Card -->
+            <div
+                class="bg-white dark:bg-slate-900 rounded-xl p-6 shadow-sm border border-slate-200 dark:border-slate-800">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="font-bold text-sm flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary">image</span>
+                        Scanned Images
+                    </h3>
+                    <span id="scan-count-badge" class="text-[10px] font-bold text-slate-400">0 RECENT SCANS</span>
+                </div>
+
+                <div id="scanned-images-grid"
+                    class="grid grid-cols-3 gap-2 mb-4 max-h-64 overflow-y-auto pr-1 custom-scrollbar">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3 pt-4 border-t border-slate-100 dark:border-slate-800">
+                    <button onclick="toggleSelectionMode()" id="select-btn"
+                        class="flex items-center justify-center gap-2 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 py-2.5 rounded-lg text-xs font-bold hover:bg-slate-50 dark:hover:bg-slate-700 transition-all">
+                        <span class="material-symbols-outlined text-sm">check_box</span>
+                        <span id="select-btn-text">Select Image</span>
+                    </button>
+                    <button onclick="deleteSelectedImages()" id="delete-btn" disabled
+                        class="flex items-center justify-center gap-2 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 py-2.5 rounded-lg text-xs font-bold hover:bg-red-50 hover:text-red-600 hover:border-red-200 dark:hover:bg-red-900/20 dark:hover:text-red-400 dark:hover:border-red-800 transition-all opacity-50 cursor-not-allowed">
+                        <span class="material-symbols-outlined text-sm">delete</span>
+                        <span id="delete-btn-text">Delete</span>
+                    </button>
+                </div>
+                <div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800">
+                    <button onclick="saveGestureSession()"
+                        class="w-full flex items-center justify-center gap-2 bg-primary text-white py-3 rounded-lg text-sm font-bold hover:bg-primary/90 transition-all shadow-lg shadow-primary/20">
+                        <span class="material-symbols-outlined text-lg">save</span>
+                        Save Gesture to Library
+                    </button>
+                </div>
+            </div>
+        </div>
+        </div>
+    </main>
+    <!-- Scripts -->
+    <script src="gesture_logic.js"></script>
+</body>
+
+</html>

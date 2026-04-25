@@ -1,0 +1,105 @@
+[
+    {
+        "name": "ChatGPT",
+        "version": "1.0",
+        "icon": "widgets",
+        "status": "Active",
+        "mappings": 0
+    },
+    {
+        "name": "Google Classroom",
+        "version": "1.0",
+        "icon": "widgets",
+        "status": "Active",
+        "mappings": 0
+    },
+    {
+        "name": "Google Chrome",
+        "version": "146.0.7680.165",
+        "icon": "language",
+        "status": "Active",
+        "mappings": 0
+    },
+    {
+        "name": "BlueStacks",
+        "version": "5.22.150.1014",
+        "icon": "widgets",
+        "status": "Active",
+        "mappings": 0
+    },
+    {
+        "name": "BlueStacks Services",
+        "version": "3.0.9",
+        "icon": "widgets",
+        "status": "Active",
+        "mappings": 0
+    },
+    {
+        "name": "Copilot",
+        "version": "146.0.3856.80",
+        "icon": "widgets",
+        "status": "Active",
+        "mappings": 0
+    },
+    {
+        "name": "Antigravity (User)",
+        "version": "1.21.6",
+        "icon": "widgets",
+        "status": "Active",
+        "mappings": 0
+    },
+    {
+        "name": "Google Gemini",
+        "version": "1.0",
+        "icon": "widgets",
+        "is_staged": false,
+        "is_connected": false,
+        "status": "Active",
+        "mappings": 0
+    },
+    {
+        "name": "Google Meet",
+        "version": "1.0",
+        "icon": "widgets",
+        "is_staged": false,
+        "is_connected": false,
+        "status": "Active",
+        "mappings": 0
+    },
+    {
+        "name": "IntelliJ IDEA 2025.3.1.1",
+        "version": "253.29346.240",
+        "icon": "widgets",
+        "is_staged": false,
+        "is_connected": false,
+        "status": "Active",
+        "mappings": 0
+    },
+    {
+        "name": "YouTube",
+        "version": "1.0",
+        "icon": "widgets",
+        "is_staged": false,
+        "is_connected": false,
+        "status": "Active",
+        "mappings": 0
+    },
+    {
+        "name": "Microsoft Edge",
+        "version": "146.0.3856.109",
+        "icon": "widgets",
+        "is_staged": false,
+        "is_connected": false,
+        "status": "Active",
+        "mappings": 0
+    },
+    {
+        "name": "Perplexity",
+        "version": "1.0",
+        "icon": "widgets",
+        "is_staged": false,
+        "is_connected": false,
+        "status": "Active",
+        "mappings": 0
+    }
+]

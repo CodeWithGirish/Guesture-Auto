@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #0a0a0f;
+            font-family: 'Segoe UI', -apple-system, sans-serif;
+            user-select: none;
+        }
+
+        /* Camera feed fills the entire window */
+        #feed {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Draggable area — top strip so user can drag the window from the top */
+        .drag-zone {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            -webkit-app-region: drag;
+            z-index: 10;
+        }
+
+        /* Live indicator dot + text */
+        .live-indicator {
+            position: absolute;
+            top: 7px;
+            left: 8px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            z-index: 20;
+            pointer-events: none;
+        }
+
+        .live-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 6px rgba(16, 185, 129, 0.6);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .live-text {
+            font-size: 8px;
+            font-weight: 800;
+            color: #10b981;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Close button — only shows on hover */
+        .close-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(4px);
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.15s ease, background 0.15s ease;
+            z-index: 30;
+            -webkit-app-region: no-drag;
+            line-height: 1;
+        }
+
+        body:hover .close-btn {
+            opacity: 1;
+        }
+
+        .close-btn:hover {
+            background: #ef4444;
+            color: #fff;
+        }
+
+        /* Bottom overlay gradient with gesture info */
+        .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 18px 8px 6px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, transparent 100%);
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            pointer-events: none;
+            z-index: 15;
+        }
+
+        /* Gesture name badge */
+        .gesture-badge {
+            font-size: 9px;
+            font-weight: 700;
+            color: #fff;
+            background: rgba(26, 34, 127, 0.9);
+            padding: 3px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            max-width: 160px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateY(4px);
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+
+        .gesture-badge.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Confidence percentage text */
+        .conf-text {
+            font-size: 8px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.65);
+            letter-spacing: 0.5px;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.5;
+                transform: scale(0.85);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <img id="feed" src="" alt="" />
+
+    <div class="drag-zone"></div>
+
+    <div class="live-indicator">
+        <div class="live-dot"></div>
+        <span class="live-text">Live</span>
+    </div>
+
+    <button class="close-btn" onclick="closeFloat()" title="Close">&#x2715;</button>
+
+    <div class="overlay">
+        <span id="gesture-label" class="gesture-badge"></span>
+        <span id="conf-text" class="conf-text"></span>
+    </div>
+
+    <script>
+        /**
+         * Primary frame handler called by FloatingWindowService.push_frame().
+         * Receives a lightweight payload: frame + gesture name + confidence.
+         * This is the dedicated float window handler — NO JSON parsing needed.
+         */
+        function updateFloatFrame(imageSrc, gestureName, confidence) {
+            var feed = document.getElementById('feed');
+            if (feed) feed.src = imageSrc;
+
+            var label = document.getElementById('gesture-label');
+            var conf = document.getElementById('conf-text');
+
+            if (label) {
+                if (gestureName && gestureName.length > 0) {
+                    label.textContent = gestureName;
+                    label.classList.add('active');
+                } else {
+                    label.classList.remove('active');
+                }
+            }
+            if (conf) {
+                conf.textContent = confidence > 0 ? confidence + '%' : '';
+            }
+        }
+
+        /**
+         * Legacy fallback — matches the old callback convention.
+         * Keeps backward compatibility if frames arrive via the main window path.
+         */
+        function updateFrame(imageSrc) {
+            var feed = document.getElementById('feed');
+            if (feed) feed.src = imageSrc;
+        }
+
+        /**
+         * Closes the floating window via its dedicated _FloatWindowAPI.
+         * The close() method on the API schedules async destruction to prevent
+         * crashing from within the window's own JS call context.
+         */
+        function closeFloat() {
+            try {
+                if (window.pywebview && pywebview.api && pywebview.api.close) {
+                    pywebview.api.close();
+                }
+            } catch (e) {
+                // Window may be closing already — safe to ignore
+            }
+        }
+    </script>
+</body>
+
+</html>

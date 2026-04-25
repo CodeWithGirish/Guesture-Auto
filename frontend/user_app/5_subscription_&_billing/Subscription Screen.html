@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Subscription - Hand Gesture Automation System</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1a227f",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#121320",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-slate-900 font-display">
+    <div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+        <div class="layout-container flex h-full grow flex-col">
+            <!-- Top Navigation Bar -->
+            <header
+                class="sticky top-0 z-50 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+                <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex items-center h-16 gap-8">
+                        <!-- Logo Section -->
+                        <div class="flex items-center gap-3">
+                            <div class="bg-primary p-1.5 rounded-lg text-white">
+                                <span class="material-symbols-outlined block">back_hand</span>
+                            </div>
+                            <h1 class="text-lg font-bold tracking-tight text-primary">GuestureAuto<span
+                                    class="text-slate-500 font-normal"></span></h1>
+                        </div>
+                        <nav class="hidden md:flex items-center gap-9">
+                            <a class="text-slate-600 hover:text-primary text-sm font-medium transition-colors"
+                                href="..\1_Dashboard and Profile\User Dashboard Screen.html">Dashboard</a>
+                            <a class="text-primary text-sm font-bold border-b-2 border-primary pb-1"
+                                href="#">Subscription</a>
+                        </nav>
+                        <!-- Desktop Navigation Links -->
+                        <div class="flex flex-1 justify-end gap-8">
+                            <div class="flex items-center gap-3">
+                                <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-9 border-2 border-primary/20"
+                                    data-alt="User profile avatar smiling businessman"
+                                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCoT89HIhnX-zYbQJewlehr_V85wp8btkyr1ntPF4NbWk0EvNbl_0AayigfATUIYVwJl5HiYfOwqWhvo0ecWbBTeOt9MMgFGgAaqrZP8VyUqnsN93an0sGpoKl1p_wF7HfU4lNQVOROhTJ9UhezIpDdKWCunxcwDsSHE5e6dhBifHqcBKeJP3Vz9wreRtwxGQU3_zuz2n-ZGuzoGwS2-n85n1caQZYFMVRlAGfUbI7n-SJZAoAvE_lsezdZ3_rraCZ-InC_8JqWQoqq");'>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <main class="flex-1 max-w-[1440px] mx-auto w-full px-4 md:px-10 py-8">
+                <!-- Page Title -->
+                <div class="mb-10">
+                    <h1 class="text-3xl font-black text-slate-900 tracking-tight">Subscription &amp; Billing</h1>
+                    <p class="text-slate-500 mt-1">Manage your plan, monitor usage, and view your billing history.</p>
+                </div>
+                <!-- Pricing Panel -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                    <!-- Free Plan -->
+                    <div
+                        class="flex flex-col gap-6 rounded-xl border border-primary/10 bg-white p-8 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="flex flex-col gap-2">
+                            <h3 class="text-slate-500 text-sm font-bold uppercase tracking-wider">Free</h3>
+                            <div class="flex items-baseline gap-1">
+                                <span class="text-4xl font-black text-slate-900">$0</span>
+                                <span class="text-slate-400 text-sm">/mo</span>
+                            </div>
+                            <p class="text-sm text-slate-500 mt-2">Perfect for individual hobbyists.</p>
+                        </div>
+                        <button
+                            class="w-full py-2.5 px-4 bg-primary/5 hover:bg-primary/10 text-primary font-bold rounded-lg transition-colors">
+                            Downgrade
+                        </button>
+                        <ul class="flex flex-col gap-4">
+                            <li class="flex items-center gap-3 text-sm text-slate-700">
+                                <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                                Basic gesture set
+                            </li>
+                            <li class="flex items-center gap-3 text-sm text-slate-700">
+                                <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                                Local execution only
+                            </li>
+                            <li class="flex items-center gap-3 text-sm text-slate-400">
+                                <span class="material-symbols-outlined text-slate-300 text-lg">cancel</span>
+                                Community support
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Pro Plan (Highlighted) -->
+                    <div
+                        class="flex flex-col gap-6 rounded-xl border-2 border-primary bg-white p-8 shadow-xl relative scale-105 z-10">
+                        <div
+                            class="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-white text-[10px] font-bold uppercase tracking-widest px-4 py-1 rounded-full">
+                            Current Plan
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <h3 class="text-primary text-sm font-bold uppercase tracking-wider">Pro</h3>
+                            <div class="flex items-baseline gap-1">
+                                <span class="text-4xl font-black text-slate-900">$49</span>
+                                <span class="text-slate-400 text-sm">/mo</span>
+                            </div>
+                            <p class="text-sm text-slate-500 mt-2">Advanced tools for professionals.</p>
+                        </div>
+                        <button
+                            class="w-full py-2.5 px-4 bg-primary text-white font-bold rounded-lg shadow-lg shadow-primary/20 hover:bg-primary/90 transition-colors">
+                            Manage Plan
+                        </button>
+                        <ul class="flex flex-col gap-4">
+                            <li class="flex items-center gap-3 text-sm text-slate-700">
+                                <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                                Advanced gesture library
+                            </li>
+                            <li class="flex items-center gap-3 text-sm text-slate-700">
+                                <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                                API access (50k calls)
+                            </li>
+                            <li class="flex items-center gap-3 text-sm text-slate-700">
+                                <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                                1,000 gestures / mo
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Enterprise Plan -->
+                    <div
+                        class="flex flex-col gap-6 rounded-xl border border-primary/10 bg-white p-8 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="flex flex-col gap-2">
+                            <h3 class="text-slate-500 text-sm font-bold uppercase tracking-wider">Enterprise</h3>
+                            <div class="flex items-baseline gap-1">
+                                <span class="text-4xl font-black text-slate-900">$199</span>
+                                <span class="text-slate-400 text-sm">/mo</span>
+                            </div>
+                            <p class="text-sm text-slate-500 mt-2">Scaling solutions for businesses.</p>
+                        </div>
+                        <button
+                            class="w-full py-2.5 px-4 bg-primary/5 hover:bg-primary/10 text-primary font-bold rounded-lg transition-colors">
+                            Contact Sales
+                        </button>
+                        <ul class="flex flex-col gap-4">
+                            <li class="flex items-center gap-3 text-sm text-slate-700">
+                                <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                                Custom gesture training
+                            </li>
+                            <li class="flex items-center gap-3 text-sm text-slate-700">
+                                <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                                Unlimited API calls
+                            </li>
+                            <li class="flex items-center gap-3 text-sm text-slate-700">
+                                <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                                24/7 dedicated support
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Usage Statistics Section -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                    <div class="bg-white p-6 rounded-xl border border-primary/10 shadow-sm">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="font-bold text-slate-800 flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary">analytics</span>
+                                Usage Statistics
+                            </h3>
+                            <span class="text-xs font-semibold text-primary bg-primary/10 px-2 py-1 rounded">Resets in
+                                12 days</span>
+                        </div>
+                        <div class="space-y-8">
+                            <!-- Gestures Bar -->
+                            <div class="flex flex-col gap-2">
+                                <div class="flex justify-between items-end">
+                                    <span class="text-sm font-medium text-slate-600 uppercase tracking-tight">Gestures
+                                        Used</span>
+                                    <span class="text-sm font-bold text-slate-900">850 / 1,000</span>
+                                </div>
+                                <div class="h-3 w-full bg-slate-100 rounded-full overflow-hidden">
+                                    <div class="h-full bg-primary rounded-full transition-all duration-500"
+                                        style="width: 85%;"></div>
+                                </div>
+                                <p class="text-xs text-slate-400">85% of monthly limit reached</p>
+                            </div>
+                            <!-- API Calls Bar -->
+                            <div class="flex flex-col gap-2">
+                                <div class="flex justify-between items-end">
+                                    <span class="text-sm font-medium text-slate-600 uppercase tracking-tight">API
+                                        Calls</span>
+                                    <span class="text-sm font-bold text-slate-900">15,420 / 50,000</span>
+                                </div>
+                                <div class="h-3 w-full bg-slate-100 rounded-full overflow-hidden">
+                                    <div class="h-full bg-primary/60 rounded-full transition-all duration-500"
+                                        style="width: 30.84%;"></div>
+                                </div>
+                                <p class="text-xs text-slate-400">31% of monthly limit reached</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Activate License Box -->
+                    <div
+                        class="bg-primary p-6 rounded-xl shadow-lg flex flex-col justify-center relative overflow-hidden">
+                        <div class="absolute top-0 right-0 p-8 opacity-10">
+                            <span class="material-symbols-outlined text-9xl">key</span>
+                        </div>
+                        <h3 class="font-bold text-white text-xl mb-2">Activate License</h3>
+                        <p class="text-primary-foreground text-blue-100 text-sm mb-6">Redeem a hardware bundle code or
+                            enterprise activation key here.</p>
+                        <div class="flex gap-2">
+                            <input
+                                class="flex-1 bg-white/10 border-white/20 text-white placeholder-white/50 rounded-lg px-4 py-2 focus:ring-2 focus:ring-white/50 focus:border-transparent outline-none transition-all"
+                                placeholder="XXXX-XXXX-XXXX-XXXX" type="text" />
+                            <button
+                                class="bg-white text-primary font-bold px-6 py-2 rounded-lg hover:bg-blue-50 transition-colors">Activate</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Billing History Table -->
+                <div class="bg-white rounded-xl border border-primary/10 shadow-sm overflow-hidden">
+                    <div class="px-6 py-4 border-b border-primary/10 flex items-center justify-between bg-slate-50/50">
+                        <h3 class="font-bold text-slate-800">Billing History</h3>
+                        <button class="text-primary text-sm font-bold hover:underline">Export All CSV</button>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="text-slate-400 text-xs font-bold uppercase tracking-wider">
+                                    <th class="px-6 py-4">Date</th>
+                                    <th class="px-6 py-4">Invoice ID</th>
+                                    <th class="px-6 py-4">Amount</th>
+                                    <th class="px-6 py-4">Status</th>
+                                    <th class="px-6 py-4 text-right">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-primary/5">
+                                <tr class="hover:bg-slate-50 transition-colors">
+                                    <td class="px-6 py-4 text-sm text-slate-700">Oct 12, 2023</td>
+                                    <td class="px-6 py-4 text-sm font-mono text-slate-500">INV-882910</td>
+                                    <td class="px-6 py-4 text-sm font-bold text-slate-900">$49.00</td>
+                                    <td class="px-6 py-4">
+                                        <span
+                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                            Paid
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 text-right">
+                                        <button
+                                            class="inline-flex items-center gap-1 text-primary hover:text-primary/70 transition-colors font-semibold text-sm">
+                                            <span class="material-symbols-outlined text-lg">download</span>
+                                            Invoice
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 transition-colors">
+                                    <td class="px-6 py-4 text-sm text-slate-700">Sep 12, 2023</td>
+                                    <td class="px-6 py-4 text-sm font-mono text-slate-500">INV-881452</td>
+                                    <td class="px-6 py-4 text-sm font-bold text-slate-900">$49.00</td>
+                                    <td class="px-6 py-4">
+                                        <span
+                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                            Paid
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 text-right">
+                                        <button
+                                            class="inline-flex items-center gap-1 text-primary hover:text-primary/70 transition-colors font-semibold text-sm">
+                                            <span class="material-symbols-outlined text-lg">download</span>
+                                            Invoice
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 transition-colors">
+                                    <td class="px-6 py-4 text-sm text-slate-700">Aug 12, 2023</td>
+                                    <td class="px-6 py-4 text-sm font-mono text-slate-500">INV-879983</td>
+                                    <td class="px-6 py-4 text-sm font-bold text-slate-900">$49.00</td>
+                                    <td class="px-6 py-4">
+                                        <span
+                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                            Paid
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 text-right">
+                                        <button
+                                            class="inline-flex items-center gap-1 text-primary hover:text-primary/70 transition-colors font-semibold text-sm">
+                                            <span class="material-symbols-outlined text-lg">download</span>
+                                            Invoice
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+            <!-- Footer Meta -->
+            <footer
+                class="mt-auto px-10 py-6 border-t border-primary/5 bg-white flex justify-between items-center text-xs text-slate-400">
+                <p>© 2025 Hand Gesture Automation. All rights reserved.</p>
+                <div class="flex gap-6">
+                    <a class="hover:text-primary" href="#">Terms of Service</a>
+                    <a class="hover:text-primary" href="#">Privacy Policy</a>
+                    <a class="hover:text-primary" href="#">Help Center</a>
+                </div>
+            </footer>
+        </div>
+    </div>
+</body>
+
+</html>
