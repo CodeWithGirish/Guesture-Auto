@@ -68,6 +68,24 @@ GuestureAuto/
     ```
     *This provides access to the Dataset Overview and Model Configuration screens for training new gestures.*
 
+## Output
+* User
+<img width="940" height="529" alt="image" src="https://github.com/user-attachments/assets/7aa1e528-ee14-4824-80a8-c144027e6caa" />
+<img width="940" height="529" alt="image" src="https://github.com/user-attachments/assets/3820ba3b-b894-4780-a6f0-2e31aa379174" />
+<img width="940" height="529" alt="image" src="https://github.com/user-attachments/assets/7d8e46fd-a7ee-4fc5-a6b1-616645bde314" />
+<img width="940" height="529" alt="image" src="https://github.com/user-attachments/assets/bd11ec4d-e38a-4ea4-a224-028ccb0bb565" />
+<img width="940" height="527" alt="image" src="https://github.com/user-attachments/assets/6dfcb760-45a1-446d-a57b-2c042eeaa848" />
+<img width="940" height="529" alt="image" src="https://github.com/user-attachments/assets/2a83dce9-5ecc-4305-a121-0e593a060a1b" />
+<img width="940" height="529" alt="image" src="https://github.com/user-attachments/assets/baef5c77-8061-4965-a6e3-ee4eaa0e51bc" />
+<img width="940" height="529" alt="image" src="https://github.com/user-attachments/assets/192af99b-759c-4bc9-ab85-5653bd697529" />
+
+* Admin
+<img width="940" height="529" alt="image" src="https://github.com/user-attachments/assets/3120cf8b-9744-4e1f-9309-f4f8a6c89e23" />
+<img width="940" height="529" alt="image" src="https://github.com/user-attachments/assets/dbb04645-19c4-4d66-bb0e-ccce7481db70" />
+<img width="940" height="529" alt="image" src="https://github.com/user-attachments/assets/97a48bde-7ed6-463a-964a-a0586b7be7a7" />
+<img width="940" height="529" alt="image" src="https://github.com/user-attachments/assets/c46a0239-6ae9-45d4-a58b-81e6077d5bc8" />
+  
+
 ## ⚙️ How it Works
 
 1.  **Detection:** The `GesturePredictor` captures frames from the webcam, detects 21 hand landmarks, and normalizes them for scale invariance.
