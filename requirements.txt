@@ -1,9 +1,73 @@
-mediapipe
-opencv-python
-pywebview
-torch 
-torchvision
-psutil
-scikit-learn
-pyautogui
-keyboard
+# ============================================================
+# GestureAuto - Requirements
+# Python 3.10 recommended (tested on 3.10.x)
+# Install with: pip install -r requirements.txt
+# ============================================================
+
+# -- Core Computer Vision ------------------------------------
+mediapipe==0.10.21
+# NOTE: Use opencv-contrib-python ONLY (not opencv-python).
+# opencv-python 5.x needs numpy>=2 which breaks mediapipe.
+opencv-contrib-python==4.11.0.86
+
+# -- Deep Learning -------------------------------------------
+# NOTE: tensorflow and mediapipe share protobuf.
+# Keep these versions pinned to avoid conflicts!
+tensorflow==2.16.2
+tensorflow-intel==2.16.2
+keras==3.12.4
+torch==2.14.0
+torchvision==0.29.0
+
+# -- Numerical / Data ----------------------------------------
+# numpy MUST stay <2 for mediapipe 0.10.x compatibility
+numpy==1.26.4
+scipy==1.15.3
+scikit-learn==1.7.2
+
+# -- Serialization (DO NOT freely upgrade) -------------------
+protobuf==4.25.9
+flatbuffers==25.12.19
+
+# -- Desktop Automation --------------------------------------
+pyautogui==0.9.54
+keyboard==0.13.5
+psutil==7.2.2
+
+# -- UI (PyWebView Desktop App) ------------------------------
+pywebview==6.2.1
+pythonnet==3.1.0
+
+# -- TensorFlow / Keras dependencies -------------------------
+absl-py==2.5.0
+astunparse==1.6.3
+gast==0.7.0
+google-pasta==0.2.0
+grpcio==1.84.0
+h5py==3.14.0
+libclang==18.1.1
+ml_dtypes==0.5.4
+opt_einsum==3.4.0
+optree==0.20.0
+termcolor==3.3.0
+wrapt==2.4.1
+
+# -- JAX (mediapipe dependency) ------------------------------
+jax==0.6.2
+jaxlib==0.6.2
+sentencepiece==0.2.2
+
+# -- Utilities -----------------------------------------------
+matplotlib==3.10.9
+requests==2.34.2
+rich==15.0.0
+pillow==12.3.0
+attrs==26.1.0
+packaging==26.3
+six==1.17.0
+typing_extensions==4.16.0
+certifi==2026.7.22
+charset-normalizer==3.5.1
+idna==3.20
+urllib3==2.8.0
+sounddevice==0.5.6

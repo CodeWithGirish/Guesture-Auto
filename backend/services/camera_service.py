@@ -37,13 +37,30 @@ class CameraService:
         self.hand_detected = False
         self.thread = None
         self.camera_index = 0  # Configurable — users with multiple cameras can change this
-        self.mp_hands = mp.solutions.hands
-        self.hands = self.mp_hands.Hands(
-            model_complexity=1,  # Enhanced precision for noisy images
-            min_detection_confidence=0.7, 
-            min_tracking_confidence=0.7
-        )
-        self.mp_draw = mp.solutions.drawing_utils
+        # mediapipe 1.0+ compatibility shim
+        try:
+            self.mp_hands = mp.solutions.hands
+            self.hands = self.mp_hands.Hands(
+                model_complexity=1,
+                min_detection_confidence=0.7,
+                min_tracking_confidence=0.7
+            )
+            self.mp_draw = mp.solutions.drawing_utils
+            self._mp_legacy = True
+        except AttributeError:
+            import os as _os
+            from mediapipe.tasks import python as _mp_tasks
+            from mediapipe.tasks.python import vision as _mp_vision
+            _model = _os.path.join(_os.path.dirname(__file__), '..', '..', 'models', 'hand_landmarker.task')
+            _opts = _mp_vision.HandLandmarkerOptions(
+                base_options=_mp_tasks.BaseOptions(model_asset_path=_model),
+                num_hands=2, min_hand_detection_confidence=0.7,
+                min_hand_presence_confidence=0.7, min_tracking_confidence=0.7
+            )
+            self.hands = _mp_vision.HandLandmarker.create_from_options(_opts)
+            self.mp_draw = None
+            self.mp_hands = None
+            self._mp_legacy = False
 
         self.pending_gesture = None
         self.stability_count = 0
@@ -132,22 +149,30 @@ class CameraService:
             frame_counter += 1
             frame = cv2.flip(frame, 1)
             rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            results = self.hands.process(rgb_frame)
+            if self._mp_legacy:
+                results = self.hands.process(rgb_frame)
+                _lm_list = _lm_list or []
+                _hd_list = _hd_list or []
+            else:
+                _mp_img = mp.Image(image_format=mp.ImageFormat.SRGB, data=rgb_frame)
+                _res = self.hands.detect(_mp_img)
+                _lm_list = _res.hand_landmarks
+                _hd_list = _res.handedness
             confidence = 0
             self.hand_detected = False
             candidate = None
             is_motion_candidate = False
-            
+
             hand_crop = None
-            if results.multi_hand_landmarks:
+            if _lm_list:
                 self.hand_detected = True
-                if results.multi_handedness:
-                    confidence = int(results.multi_handedness[0].classification[0].score * 100)
+                if _hd_list:
+                    confidence = int(_hd_list[0].classification[0].score * 100)
                 
                 # Extract first hand's landmarks for accurate mathematical recognition
-                first_hand = results.multi_hand_landmarks[0]
+                first_hand = _lm_list[0]
                 
-                for handLms in results.multi_hand_landmarks:
+                for handLms in _lm_list:
                     self.mp_draw.draw_landmarks(
                         frame, 
                         handLms, 
