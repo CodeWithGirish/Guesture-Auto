@@ -26,3 +26,7 @@ Desktop.ini
 # Large model artifacts (optional - comment out to include)
 # models/*.keras
 # models/*.h5
+
+# PyInstaller build artifacts
+dist/
+build/
