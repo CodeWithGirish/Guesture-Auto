@@ -1,1 +1,28 @@
 .venv/
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.class
+
+# IDE
+.vscode/
+.idea/
+
+# Temp / logs
+*.log
+test_frame_*.jpg
+output.avi
+
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Large model artifacts (optional - comment out to include)
+# models/*.keras
+# models/*.h5
